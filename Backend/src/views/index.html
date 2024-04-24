@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Indexpage</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <ul>
+                <li><a href="" class="active">Home</a></li>
+            </ul>
+        </header>
+        <section>
+            <img src="stars.png" id="stars">
+            <img src="moon.png" id="moon">
+            <img src="mountains_behind.png" id="mountains_behind">
+            <h2 id="text">Bazárbunker</h2>
+            <a href="#about" id="btn">Fedezd fel a bunkert!</a>
+            <img src="mountains_front.png" id="mountains_front">
+        </section>
+        <div class="sec" id="sec">
+            <h2>A bazárbunker</h2>
+            <p id="#about">
+                A Bazárbunker egy újszerű adásvételi platform, amely a modern technológia és a közösségi szemlélet erejét ötvözi. A platform lehetőséget kínál az embereknek arra, hogy könnyedén eladjanak vagy vásároljanak használt termékeket, legyen szó ruhákról, elektronikai cikkekről vagy bármi másról. A Bazárbunker nem csupán egy egyszerű online piactér, hanem egy olyan közösség, ahol az emberek megoszthatják tapasztalataikat, tanácsokat adhatnak egymásnak, és új barátságokat köthetnek a közös érdeklődési körök mentén.
+                
+                Az adásvételi program fő jellemzője az egyszerűség és az átláthatóság. A felhasználók könnyedén feltölthetik eladandó termékeiket a platformra, ahol részletes leírással és képekkel tudják bemutatni azokat. A vásárlók pedig könnyedén böngészhetnek a kategóriák között, hogy megtalálják a számukra legmegfelelőbb ajánlatokat. A tranzakciók zökkenőmentesen zajlanak, és a vevőknek és eladóknak is lehetőségük van értékelést adni egymásnak, így növelve a bizalmat és a minőséget a platformon.
+                
+                A Bazárbunker nem csupán egy hely, ahol termékeket lehet eladni vagy vásárolni, hanem egy olyan közösség, ahol az emberek kölcsönösen támogatják egymást. Legyen szó hasznos tanácsokról, kreatív ötletekről vagy éppen a környezettudatosságra való ösztönzésről, a Bazárbunker arra törekszik, hogy inspirálja és összekovácsolja a felhasználókat a fenntartható és tudatos életmód felé.
+            </p>
+        </div>
+        <script>
+            let stars = document.getElementById('stars');
+            let moon = document.getElementById('moon');
+            let mountains_behind = document.getElementById('mountains_behind');
+            let text = document.getElementById('text');
+            let btn = document.getElementById('btn');
+            let mountains_front = document.getElementById('mountains_front');
+            let header = document.querySelector('header');
+
+            window.addEventListener('scroll', function() {
+                let value = window.scrollY;
+                stars.style.left = value * 0.25 + 'px';
+                moon.style.top = value * 1.05 + 'px';
+                mountains_behind.style.top = value * 0.5 + 'px';
+                mountains_front.style.top = value * 0 + 'px';
+                text.style.marginRight = value * 2 + 'px';
+                text.style.marginTop = value * 0.5 + 'px';
+                btn.style.marginTop = value * 1.5 + 'px';
+                header.style.top = value * 0.1 + 'px';
+            })
+        </script>
+    </body>
+</html>
