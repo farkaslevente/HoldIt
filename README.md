@@ -17,7 +17,7 @@ __
 ## Created by
 
 <div align="center">
-<a href="https://github.com/farkaslevente"><img src="https://avatars.githubusercontent.com/u/62425103?v=4" width="100"></a>
+<a href="https://github.com/farkaslevente">
+  <img src="https://avatars.githubusercontent.com/u/62425103?v=4" width="100" class="img"></a>
 </div>
-
 
