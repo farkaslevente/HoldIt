@@ -1,5 +1,5 @@
 <div align="center">
-<img src="[https://raw.githubusercontent.com/farkaslevente/14AA-D-BazarBunker/main/MobilApp/Resources/Images/smalllogo.png](https://raw.githubusercontent.com/farkaslevente/HoldIt/master/HoldItLogo.png)" width="450"/> 
+<img src="https://raw.githubusercontent.com/farkaslevente/HoldIt/master/HoldItLogo.png" width="450"/> 
 
 
 <a href="https://www.mysql.com/"><img src="https://simpleicons.org/icons/mysql.svg" width=60></a>
