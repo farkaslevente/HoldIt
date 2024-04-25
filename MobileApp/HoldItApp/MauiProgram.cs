@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using FFImageLoading.Maui;
+using Microsoft.Extensions.Logging;
+using Camera.MAUI;
 
 namespace HoldItApp
 {
@@ -9,6 +12,10 @@ namespace HoldItApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .UseFFImageLoading()
+                .UseMauiCameraView()
+                .UseMauiCommunityToolkitMediaElement()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

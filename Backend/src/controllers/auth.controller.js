@@ -55,14 +55,14 @@ const authController = {
         (await dbFunctions.execQueryWithReturn(
           `SELECT * FROM users WHERE email = '${email}'`
         )) || [];
-
+      console.log(rows);
       if (rows == [] || !rows || rows.length === 0) {
         return res.status(401).json({ error: "Invalid email or password" });
       }
 
       let isPasswordValid = false;
       const user = rows[0];
-      if (password) {
+      if (pwd) {
         isPasswordValid = await bcrypt.compare(pwd, user.pwd);
         if (!isPasswordValid) {
           return res.status(401).json({ message: "Invalid email or password" });
@@ -78,7 +78,7 @@ const authController = {
           const token = accessToken({ payload });
 
           const d = new Date();
-          dbFunctions.execQueryRegister(`INSERT INTO tokens (id, token, date, tulajEmail) VALUES 
+          dbFunctions.execQueryRegister(`INSERT INTO tokens (id, token, date, ownerEmail) VALUES 
                 (null, '${token}', '${d}', '${user.email}')`);
 
           req.session.token = token;
