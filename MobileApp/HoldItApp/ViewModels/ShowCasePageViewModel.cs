@@ -8,5 +8,6 @@ namespace HoldItApp.ViewModels
 {
     public class ShowCasePageViewModel
     {        
+        public Microsoft.Maui.Controls.ImageSource source { get; set; }
     }
 }
