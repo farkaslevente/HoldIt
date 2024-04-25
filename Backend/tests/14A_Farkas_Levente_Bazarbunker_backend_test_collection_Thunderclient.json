@@ -1,0 +1,395 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Bazarbunker",
+    "dateExported": "2024-04-15T11:12:11.499Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "92f88d19-fd90-474a-9f4e-87c1510b6d9c",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Összes felhasználó lekérése",
+            "url": "localhost:9000/users",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-04-15T10:15:51.592Z",
+            "modified": "2024-04-15T10:26:06.255Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBUZXJvbiIsImVtYWlsIjoidGVzdEB0ZXJvbi5jb20iLCJsb2NhdGlvbiI6InRlc3RjaXR5IiwicFBpYyI6Imh0dHBzOi8vd3d3LnN2Z3JlcG8uY29tL3Nob3cvNDQyMDc1L2F2YXRhci1kZWZhdWx0LXN5bWJvbGljLnN2ZyIsInJvbGUiOjEsImZhdm91cml0ZXMiOiIiLCJwaG9uZSI6IiJ9LCJpYXQiOjE3MTMxNzU5ODQsImV4cCI6MTcxNTc2Nzk4NH0.g2r-E7AXLYfYlLhz1SgbIvcTqTz3L9gboxIi0gPwxnM"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "55befd58-804b-4573-aa56-9186633308ce",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Összes hirdetés lekérése",
+            "url": "localhost:9000/ads",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2024-04-15T10:46:28.546Z",
+            "modified": "2024-04-15T10:49:45.988Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "10fad163-09b7-4b87-b21c-a9f5406afe4c",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Települések lekérése",
+            "url": "localhost:9000/settlements",
+            "method": "GET",
+            "sortNum": 17500,
+            "created": "2024-04-15T11:06:27.636Z",
+            "modified": "2024-04-15T11:07:36.134Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "bb5e42f0-f443-4696-95ca-43dfb517a92d",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Regisztráció az oldalra",
+            "url": "localhost:9000/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-04-15T10:29:38.950Z",
+            "modified": "2024-04-15T10:40:58.725Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Test Teron\",\n  \"email\": \"test@teron.com\",\n  \"location\": \"Tesztváros\",\n  \"password\": \"teszt\",\n  \"phone\": \"06701234567\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "2cf072a1-11d8-449e-8a64-1ff7cc6db008",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Bejelentkezés az oldalra",
+            "url": "localhost:9000/login",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-04-15T10:44:30.777Z",
+            "modified": "2024-04-15T10:45:52.862Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"test@teron.com\",\n  \"password\": \"teszt\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "886787f9-d2b7-4892-8045-cd782218684d",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Kép feltöltése",
+            "url": "localhost:9000/pictures/upload",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-04-15T10:50:48.196Z",
+            "modified": "2024-04-15T10:56:49.263Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "binary",
+                "raw": "",
+                "form": [],
+                "binary": "c:\\Users\\Markó.Bence.Mendbajr\\Downloads\\images\\bazarbunker-logo.png"
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBUZXJvbiIsImVtYWlsIjoidGVzdEB0ZXJvbi5jb20iLCJsb2NhdGlvbiI6InRlc3RjaXR5IiwicFBpYyI6Imh0dHBzOi8vd3d3LnN2Z3JlcG8uY29tL3Nob3cvNDQyMDc1L2F2YXRhci1kZWZhdWx0LXN5bWJvbGljLnN2ZyIsInJvbGUiOjEsImZhdm91cml0ZXMiOiIiLCJwaG9uZSI6IiJ9LCJpYXQiOjE3MTMxNzU5ODQsImV4cCI6MTcxNTc2Nzk4NH0.g2r-E7AXLYfYlLhz1SgbIvcTqTz3L9gboxIi0gPwxnM"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "b08757d3-0722-4749-9e52-2dc7b047235e",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Hirdetés feltöltése",
+            "url": "localhost:9000/ads/post",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-04-15T10:57:35.846Z",
+            "modified": "2024-04-15T11:01:59.157Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Teszt hirdetés\",\n  \"description\": \"Teszt leírás\",\n  \"category\": \"Kiegészítők\",\n  \"price\": 9999,\n  \"countyId\": 1,\n  \"settlement\": \"Tesztváros\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo5LCJuYW1lIjoiVGVzdCBUZXJvbiIsImVtYWlsIjoidGVzdEB0ZXJvbi5jb20iLCJsb2NhdGlvbiI6IlRlc3p0dsOhcm9zIiwicFBpYyI6Imh0dHBzOi8vd3d3LnN2Z3JlcG8uY29tL3Nob3cvNDQyMDc1L2F2YXRhci1kZWZhdWx0LXN5bWJvbGljLnN2ZyIsInJvbGUiOjAsImZhdm91cml0ZXMiOiIwICsiLCJwaG9uZSI6IjA2NzAxMjM0NTY3In0sImlhdCI6MTcxMzE3ODkwMCwiZXhwIjoxNzE1NzcwOTAwfQ.1UdxAdqV2GgTtXF8OVMV9WlmnSQtYTU2GVNgY1bWJA4"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "ab047b9f-6ffc-4d6b-86e5-ba558d588645",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Kedvencek adás",
+            "url": "localhost:9000/users/addfavourite",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-04-15T11:03:09.384Z",
+            "modified": "2024-04-15T11:05:28.392Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"adId\": 1\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo5LCJuYW1lIjoiVGVzdCBUZXJvbiIsImVtYWlsIjoidGVzdEB0ZXJvbi5jb20iLCJsb2NhdGlvbiI6IlRlc3p0dsOhcm9zIiwicFBpYyI6Imh0dHBzOi8vd3d3LnN2Z3JlcG8uY29tL3Nob3cvNDQyMDc1L2F2YXRhci1kZWZhdWx0LXN5bWJvbGljLnN2ZyIsInJvbGUiOjAsImZhdm91cml0ZXMiOiIwICsiLCJwaG9uZSI6IjA2NzAxMjM0NTY3In0sImlhdCI6MTcxMzE3ODkwMCwiZXhwIjoxNzE1NzcwOTAwfQ.1UdxAdqV2GgTtXF8OVMV9WlmnSQtYTU2GVNgY1bWJA4"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        },
+        {
+            "_id": "85919954-03ce-432d-94ee-e81a634b7b0c",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Új jelszó igénylése",
+            "url": "localhost:9000/users/resetpassword",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-04-15T11:08:27.297Z",
+            "modified": "2024-04-15T11:09:50.480Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"test@teron.com\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "5000"
+                }
+            ]
+        },
+        {
+            "_id": "ba530385-2cc3-493f-8dc3-4c7c4718827f",
+            "colId": "b6bb02c7-88bf-441f-bb25-8069a6097fde",
+            "containerId": "",
+            "name": "Probléma jelentése a fejlesztői csapat felé",
+            "url": "localhost:9000/users/support",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-04-15T11:10:17.518Z",
+            "modified": "2024-04-15T11:11:32.145Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Teszt cím\",\n  \"question\": \"Teszt kérdés, kérés, probléma\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo5LCJuYW1lIjoiVGVzdCBUZXJvbiIsImVtYWlsIjoidGVzdEB0ZXJvbi5jb20iLCJsb2NhdGlvbiI6IlRlc3p0dsOhcm9zIiwicFBpYyI6Imh0dHBzOi8vd3d3LnN2Z3JlcG8uY29tL3Nob3cvNDQyMDc1L2F2YXRhci1kZWZhdWx0LXN5bWJvbGljLnN2ZyIsInJvbGUiOjAsImZhdm91cml0ZXMiOiIwICsiLCJwaG9uZSI6IjA2NzAxMjM0NTY3In0sImlhdCI6MTcxMzE3ODkwMCwiZXhwIjoxNzE1NzcwOTAwfQ.1UdxAdqV2GgTtXF8OVMV9WlmnSQtYTU2GVNgY1bWJA4"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<=",
+                    "value": "500"
+                }
+            ]
+        }
+    ]
+}

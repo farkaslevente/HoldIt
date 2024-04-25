@@ -1,12 +1,12 @@
 const { config } = require("dotenv");
 config();
-const {DB_user, DB_host, DB_pwd, DB_name} = process.env
+const {DB_local_user, DB_local_host, DB_local_pwd,DB_name} = process.env
 
 const conf = {
     db: {
-        host: DB_host,
-        user: DB_user,
-        password: DB_pwd, 
+        host: DB_local_host,
+        user: DB_local_user,
+        password: DB_local_pwd, 
         database: DB_name,
         connectTimeout: 60000
     }

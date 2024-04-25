@@ -1,34 +1,30 @@
-
-const { config } = require('dotenv')
-config()
-var nodemailer = require('nodemailer');
+const { config } = require("dotenv");
+config();
+var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.EMAIL,
-    pass: process.env.PASS
-  }
+    pass: process.env.PASS,
+  },
 });
 
-
 let emailController = {
-
-  subscribe: async function (req,res,email) {
-
+  subscribe: async function (req, res, email) {
     var mailOptions = {
       from: process.env.EMAIL,
       to: email,
-      subject: "Hírlevél feliratkozás",
-      text: "Sikeresen feliratkozott a hírlevelünkre!"
+      subject: "Newsletter subscription",
+      text: "Sikeresen feliratkozott a hírlevelünkre!",
     };
 
-    transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
       } else {
-        console.log('Email sent: ' + info.response);
-        res.status(200).json({message: "Subscribe was successful"})
+        console.log("Email sent: " + info.response);
+        res.status(200).json({ message: "Subscribe was successful" });
       }
     });
   },
@@ -37,17 +33,16 @@ let emailController = {
     var mailOptions = {
       from: process.env.EMAIL,
       to: email,
-      subject: "Jelszó-visszaállítás",
-      html: this.resetEmail.replace("Kód helye", token)
-      
+      subject: "Password reset",
+      html: this.resetEmail.replace("Kód helye", token),
     };
-    
-    transporter.sendMail(mailOptions, function(error, info){
+
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
       } else {
-        console.log('Email sent: ' + info.response);
-        res.status(200).json({message: "Email sent"})
+        console.log("Email sent: " + info.response);
+        res.status(200).json({ message: "Email sent" });
       }
     });
   },
@@ -389,10 +384,9 @@ table, td { color: #000000; } #u_body a { color: #01499d; text-decoration: under
 </body>
 
 </html>
-`
-}
-
+`,
+};
 
 module.exports = {
-  emailController
-}
+  emailController,
+};

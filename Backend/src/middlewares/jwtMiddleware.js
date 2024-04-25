@@ -67,13 +67,10 @@ secret,
   if (tokenMatch) {
     const payload = {
       id: user.id,
-      name: user.nev,
-      email: user.email,
-      location: user.hely,
-      pPic: user.pPic,
-      role: user.szerep,
-      favourites: user.kedvencek,
-      phone: user.telefonszam
+      name: user.name,
+      email: user.email,      
+      pPic: user.pPic,      
+      followed: user.followed,      
   }
     let token = accessToken({payload})
     return res.status(200).json({token: `${token}`}) 

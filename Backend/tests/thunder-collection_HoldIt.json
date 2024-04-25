@@ -1,0 +1,92 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "HoldIt",
+    "dateExported": "2024-04-25T07:31:40.581Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "25686762-54fb-40a1-8657-3cd694cffd1a",
+            "colId": "42742d94-67b5-4efb-be51-311816a3b9b1",
+            "containerId": "",
+            "name": "register",
+            "url": "http://10.0.33.20:9000/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-04-25T06:54:03.896Z",
+            "modified": "2024-04-25T07:07:23.265Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Farkas Levente\",\n  \"email\":\"farkas.levente@students.jedlik.eu\",\n  \"pwd\":\"Levente\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "99c3c79f-ab5c-4f65-996c-e25df5f265e9",
+            "colId": "42742d94-67b5-4efb-be51-311816a3b9b1",
+            "containerId": "",
+            "name": "login",
+            "url": "http://10.0.33.20:9000/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-04-25T07:02:55.153Z",
+            "modified": "2024-04-25T07:03:28.705Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"teszt.elek@gmail.com\",\n  \"pwd\":\"alma\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "bef76b87-0e8d-4722-b176-86863691533f",
+            "colId": "42742d94-67b5-4efb-be51-311816a3b9b1",
+            "containerId": "",
+            "name": "reset password",
+            "url": "http://10.0.33.20:9000/users/resetpassword",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-04-25T07:05:53.325Z",
+            "modified": "2024-04-25T07:06:23.460Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"farkas.levente@students.jedlik.eu\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "36b29c4e-8501-4c44-b7e0-a21d769c5766",
+            "colId": "42742d94-67b5-4efb-be51-311816a3b9b1",
+            "containerId": "",
+            "name": "post upload",
+            "url": "http://10.0.33.20:9000/uploads/post",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-04-25T07:29:54.884Z",
+            "modified": "2024-04-25T07:30:38.366Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e1213100-1706-41b7-ab58-a8fa5cc6f5ac",
+            "colId": "42742d94-67b5-4efb-be51-311816a3b9b1",
+            "containerId": "",
+            "name": "support request",
+            "url": "",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-04-25T07:30:58.205Z",
+            "modified": "2024-04-25T07:30:58.205Z",
+            "headers": []
+        }
+    ]
+}
