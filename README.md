@@ -12,8 +12,10 @@
 
 ## Theme
 
-__
+You had enough of advertisements in social media? Would you want to share your favourite pictures with your friends? 
+"Hold it!" is the application for you then. There are no advertisements, just the pure adventures of your friends
 
+_Application is currently in still development_
 ## Created by
 
 <div align="center">
