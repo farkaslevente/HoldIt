@@ -14,5 +14,7 @@ namespace HoldItApp.Models
         public string comment { get; set; }
         public int ownerId { get; set; }        
         public int gridColumn { get; set; }
+        public Color messageColor { get; set; }
+        public Color textColor { get; set; }
     }
 }

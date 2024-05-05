@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace HoldItApp.ViewModels
 {
-    public class userPageViewModel : BindableObject
+    public class ProfilePageViewModel : BindableObject
     {
         public ICommand userUpdateCommand { get; set; }
         public ObservableCollection<UserModel> users { get; set; }
@@ -61,7 +61,7 @@ namespace HoldItApp.ViewModels
             }
         }
         public ICommand userEditCommand { get; set; }
-        public userPageViewModel()
+        public ProfilePageViewModel()
         {
             users = new ObservableCollection<UserModel>();            
             a();            

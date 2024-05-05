@@ -9,11 +9,11 @@
     </ContentPage.BindingContext>
     <Grid ColumnDefinitions="*,16*,*" RowDefinitions="*,40">
         <ScrollView Grid.Column="1" Grid.Row="0">
-            <Grid RowDefinitions="70,100,50,10,50,50,250,40,50" ColumnDefinitions="2*,*" Margin="0,-20,0,0">
+            <Grid RowDefinitions="30,100,50,10,50,50,250,40,50" ColumnDefinitions="2*,*" Margin="0,-20,0,0">
                 <Image Source="smalllogo.png"
                        Grid.Row="0"
                        Grid.ColumnSpan="2"/>
-                <Label Text="Érdeklik&#10;újdonságaink?" 
+                <Label Text="Are You interested &#10;in our project?" 
                        FontSize="25"
                        Grid.Row="1"
                        Grid.Column="0"
@@ -21,22 +21,21 @@
                 <Button VerticalOptions="Center"                        
                            Grid.Row="1"
                            Grid.Column="1"
-                        Text="Iratkozzon fel"                        
+                        Text="Subscribe"                        
                         Padding="0"
                         Margin="10"
                         Command="{Binding subscribeCommand}"/>
                 <HorizontalStackLayout Grid.Row="2">
                     <Image Source="support.svg"/>
-                    <Label Text=" Kérdése merült fel?&#10; Tegye fel!"
+                    <Label Text=" There are questions in Your mind?&#10; Ask us anything!"
                            FontSize="18"
                            Margin="10,0,0,0"/>
                 </HorizontalStackLayout>
                 <Frame CornerRadius="10" Grid.Row="4" Padding="6" Grid.ColumnSpan="2">
-                    <Entry Text="{Binding questionTitle}" Placeholder="Kérdés, probléma témája:"/>
+                    <Entry Text="{Binding questionTitle}" Placeholder="The topic of Your question:"/>
                 </Frame>
-                <Label Text="Kérdése/Panasza:" Grid.Row="5" VerticalOptions="End"
-                       FontSize="20"
-                       TextColor="Orange"
+                <Label Text="Your question:" Grid.Row="5" VerticalOptions="End"
+                       FontSize="20"                       
                        FontAttributes="Bold"/>
                 <Frame CornerRadius="10" Grid.Row="6" Padding="6" Grid.ColumnSpan="2">
                     <Editor Text="{Binding questionContent}"/>
@@ -44,7 +43,7 @@
                 <Button VerticalOptions="Center"                        
                            Grid.Row="8"
                            Grid.ColumnSpan="2"
-                           Text="Kérdés, Panasz elküldése" 
+                           Text="Send" 
                            FontAttributes="Bold"
                            FontSize="18"
                            Padding="0"

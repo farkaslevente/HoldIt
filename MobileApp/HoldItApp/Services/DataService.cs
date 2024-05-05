@@ -85,7 +85,7 @@ namespace HoldItApp.Services
 
         public static async Task<string> login(string email, string password)
         {
-            string jsonData = JsonConvert.SerializeObject(new { email = email, password = password });
+            string jsonData = JsonConvert.SerializeObject(new { email = email, pwd = password });
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.PostAsync(url + "/login", content);
@@ -93,7 +93,7 @@ namespace HoldItApp.Services
 
             if ((int)response.StatusCode == 401)
             {
-                return "Helytelen bejelentkezés!";
+                return "Invalid login!";
             }
             else
             {

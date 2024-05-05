@@ -1,4 +1,5 @@
 ﻿using HoldItApp.Services;
+using HoldItApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace HoldItApp.ViewModels
                 errorMessage = await DataService.login(email, pwd);
                 if (errorMessage == null)
                 {
-                    await Shell.Current.GoToAsync(nameof(MainPage));
+                    await Shell.Current.GoToAsync(nameof(HomePage));
                 }
             });
         }

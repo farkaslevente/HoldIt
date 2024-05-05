@@ -14,7 +14,7 @@ namespace HoldItApp
             Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
             Routing.RegisterRoute(nameof(ForgottenPwdPage), typeof(ForgottenPwdPage));
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
-            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(PPCatalogPage), typeof(PPCatalogPage));
             Routing.RegisterRoute(nameof(TimelinePage), typeof(TimelinePage));            
             Routing.RegisterRoute(nameof(SearchResultPage), typeof(SearchResultPage));
@@ -23,6 +23,8 @@ namespace HoldItApp
             Routing.RegisterRoute(nameof(ResetPwdCodePage), typeof(ResetPwdCodePage));
             Routing.RegisterRoute(nameof(ResetPwdFinalStagePage), typeof(ResetPwdFinalStagePage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+
+            Routing.RegisterRoute(nameof(PageTester), typeof(PageTester));
 
 
         }       

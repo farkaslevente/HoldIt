@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:HoldItApp.ViewModels"
              x:Class="HoldItApp.Views.TimelinePage"
-             Title="TimelinePage"
-             Shell.NavBarIsVisible="False">
+             Title=""
+             Shell.NavBarIsVisible="True">
     <ContentPage.BindingContext>
         <viewmodels:TimelinePageViewModel/>
     </ContentPage.BindingContext>
@@ -12,11 +12,12 @@
         <CollectionView ItemsSource="{Binding posts}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,*">
-                        <Border Grid.Column="{Binding gridColumn}">
+                    <Grid ColumnDefinitions="*,*" Margin="20">
+                        <Label Text="alma" FontSize="20" Grid.Column="{Binding gridColumn}" TextColor="Black" HeightRequest="50"/>
+                        <Border Grid.Column="{Binding gridColumn}" Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
                             <VerticalStackLayout>
-                                <Image Source="{Binding imgUrl}"/>
-                                <Label Text="{Binding comment}"/>
+                                <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
+                                <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10"/>
                             </VerticalStackLayout>
                         </Border>
                     </Grid>

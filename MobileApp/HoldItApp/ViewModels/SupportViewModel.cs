@@ -1,4 +1,5 @@
 ﻿using HoldItApp.Services;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,25 @@ namespace HoldItApp.ViewModels
 
             supportCommand = new Command(async () =>
             {
-                await DataService.postSupport(questionTitle, questionContent);
-                await Shell.Current.DisplayAlert("Thank you for your response!", "As soon as we process your response we will reach out to you!", "Go back");
-                questionTitle = "";
-                questionContent = "";
-                OnPropertyChanged(questionTitle);
+                if (!questionTitle.IsNullOrEmpty())
+                {
+                    if (!questionContent.IsNullOrEmpty())
+                    {
+                        await DataService.postSupport(questionTitle, questionContent);
+                        await Shell.Current.DisplayAlert("Thank you for your response!", "As soon as we process your response we will reach out to you!", "Go back");
+                        questionTitle = "";
+                        questionContent = "";
+                        OnPropertyChanged(questionTitle);
+                    }
+                    else
+                    {
+                        await Shell.Current.DisplayAlert("Error!", "Before you send your question or suggestion you must write it down in a few words!", "Go back");
+                    }
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error!", "Before you send your question or suggestion you must give it a title to be identified by our costumer service!", "Go back");
+                }                
             });
 
         }
