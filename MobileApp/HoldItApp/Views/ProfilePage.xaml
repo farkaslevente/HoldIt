@@ -1,12 +1,140 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HoldItApp.ViewModels"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="HoldItApp.Views.ProfilePage"
              Title="ProfilePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.BindingContext>
+        <vm:ProfilePageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="GridStyle" TargetType="Grid">
+            <Setter Property="Padding" Value="0,10"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*,40,10,40">
+        <VerticalStackLayout Margin="0,-10,0,0">
+
+            <Grid ColumnDefinitions="1*,16*,1*" RowDefinitions="230*,60*,60*,23*,60*,23*,60*,23*,60*,23*,60*,70*,40">
+                <Rectangle BackgroundColor="#045dd1" Grid.ColumnSpan="3" Margin="0,0,0,80"/>
+                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" 
+                     HorizontalOptions="Center"
+                     Margin="0,10,0,0">
+                    <Grid>
+                        <Border WidthRequest="200"
+                        HeightRequest="200"
+                        StrokeShape="RoundRectangle 100">
+
+                            <svg:SvgCachedImage x:Name="IMGProfielPic"  
+                           Source="{Binding profile.pPic}"
+                           Aspect="AspectFill"/>
+                        </Border>
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1"
+                     Grid.Column="1"
+                     Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     MaximumWidthRequest="200">
+                    <Label x:Name="NameLB" 
+                           Grid.Row="1" 
+                           Grid.Column="1"
+                           Text="{Binding profile.name}"  
+                           HorizontalTextAlignment="Center"
+                           FontSize="Large"
+                           MaximumWidthRequest="165"/>
+                    <ImageButton x:Name="ProfilePicChangeBTN" 
+                                 Source="changepp.svg"                           
+                                 Grid.Row="1" 
+                                 Grid.Column="1"
+                                 MaximumHeightRequest="35"
+                                 MaximumWidthRequest="35"                          
+                                 VerticalOptions="End"
+                                 Clicked="ProfilePicChangeBTN_Clicked"
+                                 IsVisible="{Binding editVisibility}"/>
+                </StackLayout>
+
+                <Grid Grid.Row="2" Grid.Column="1" Style="{StaticResource GridStyle}" 
+              RowDefinitions="*,*" MaximumHeightRequest="100">
+                    <Border Stroke="White"
+                    StrokeThickness="2">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="45,45,45,45" />
+                        </Border.StrokeShape>
+                    </Border>
+                    <Button x:Name="ProfileChangeBTN"
+                    Text="Profiladatok módosítása"
+                    MaximumHeightRequest="40"
+                    Margin="30,0"
+                    Command="{Binding profileEditCommand}"
+                    IsVisible="{Binding editVisibilityInvers}"/>
+
+                    <Button Grid.Row="1"
+                    x:Name="ProfileSaveBTN"
+                    Text="Profiladatok frissítése"
+                    MaximumHeightRequest="40"
+                    Margin="30,0"
+                    Command="{Binding profileUpdateCommand}"
+                    IsVisible="{Binding editVisibility}"/>
+                </Grid>
+                <Grid Grid.RowSpan="9" Grid.Row="3" Grid.Column="1" HeightRequest="460"
+                      RowDefinitions="*,100"
+                      IsVisible="{Binding editVisibility}">
+                    <Grid RowDefinitions="0.3*,0.3*,0.3*,0.3*" ColumnDefinitions="*,*" Grid.Row="0">
+                        <Frame CornerRadius="10" Padding="6" MaximumHeightRequest="50" Grid.Row="0" Grid.ColumnSpan="2">
+                            <Entry Text="{Binding newUserName}" Placeholder="{Binding profile.name}"/>
+                        </Frame>
+
+                        <Frame CornerRadius="10" Padding="6" MaximumHeightRequest="50" Grid.Row="1" Grid.ColumnSpan="2">
+                            <Entry Text="{Binding newUserEmail}" Placeholder="{Binding profile.email}"/>
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="6" MaximumHeightRequest="50" Grid.Row="2" Grid.ColumnSpan="2">
+                            <Grid ColumnDefinitions="*,*">
+                                <Picker Grid.Column="0"            
+                                    Title="Válasszon Vármegyét:"
+                                    ItemsSource="{Binding counties}"                
+                                    ItemDisplayBinding="{Binding nev}"
+                                    SelectedItem="{Binding selectedCounty}"
+                                    Margin="0,0,10,0">
+                                </Picker>
+
+                                <Picker Grid.Column="1"  
+                                    Title="Válasszon települést:"
+                                    ItemsSource="{Binding settlements}"
+                                    ItemDisplayBinding="{Binding nev}"
+                                    IsEnabled="{Binding SettlementEnabled}"
+                                    IsVisible="{Binding SettlementEnabled}"                                   
+                                    SelectedItem="{Binding selectedSettlement}"
+                                    Margin="10,0,0,0"/>
+                            </Grid>
+                        </Frame>
+                        <Grid MaximumHeightRequest="50" Grid.Row="3" Grid.ColumnSpan="2" ColumnDefinitions="*,3*">
+                            <Frame CornerRadius="10" Padding="6"
+                                   Grid.Column="0">
+                                <Picker ItemsSource="{Binding contractors}"
+                                        SelectedItem="{Binding selectedContractor}"
+                                        Title="Szolg."/>
+                            </Frame>
+                            <Frame CornerRadius="10" Padding="6"
+                                   Grid.Column="1"
+                                   Margin="10,0,10,0">
+                                <Entry Text="{Binding newUserMobileNumber}" Placeholder="telefonszám"
+                                       Keyboard="Numeric"
+                                       MaxLength="7"/>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </VerticalStackLayout>
+        <Button Grid.Row="1" HorizontalOptions="Center" x:Name="BTNLogout" Text="Kijelentkezés" Clicked="BTNLogout_Clicked"/>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3"
+ColumnDefinitions="*,*,*,*,*" Margin="0,0,0,10">
+            <ImageButton x:Name="BTNProfile" Source="profile.svg" Clicked="BTNProfile_Clicked" Grid.Column="0" IsVisible="{Binding LoggedInVisible}"/>
+            <ImageButton x:Name="BTNMainPage" Source="home.svg" Clicked="BTNMainPage_Clicked" Grid.Column="2"/>
+            <ImageButton x:Name="BTNSupport" Source="support.svg" Clicked="BTNSupport_Clicked" Grid.Column="4" IsVisible="{Binding LoggedInVisible}"/>
+        </Grid>
+    </Grid>
 </ContentPage>

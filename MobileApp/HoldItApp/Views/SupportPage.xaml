@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HoldItApp.ViewModels"
+             x:Class="HoldItApp.Views.SupportPage"
+             Title="SupportPage">
+    <ContentPage.BindingContext>
+        <vm:SupportViewModel/>
+    </ContentPage.BindingContext>
+    <Grid ColumnDefinitions="*,16*,*" RowDefinitions="*,40">
+        <ScrollView Grid.Column="1" Grid.Row="0">
+            <Grid RowDefinitions="70,100,50,10,50,50,250,40,50" ColumnDefinitions="2*,*" Margin="0,-20,0,0">
+                <Image Source="smalllogo.png"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"/>
+                <Label Text="Érdeklik&#10;újdonságaink?" 
+                       FontSize="25"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"/>
+                <Button VerticalOptions="Center"                        
+                           Grid.Row="1"
+                           Grid.Column="1"
+                        Text="Iratkozzon fel"                        
+                        Padding="0"
+                        Margin="10"
+                        Command="{Binding subscribeCommand}"/>
+                <HorizontalStackLayout Grid.Row="2">
+                    <Image Source="support.svg"/>
+                    <Label Text=" Kérdése merült fel?&#10; Tegye fel!"
+                           FontSize="18"
+                           Margin="10,0,0,0"/>
+                </HorizontalStackLayout>
+                <Frame CornerRadius="10" Grid.Row="4" Padding="6" Grid.ColumnSpan="2">
+                    <Entry Text="{Binding questionTitle}" Placeholder="Kérdés, probléma témája:"/>
+                </Frame>
+                <Label Text="Kérdése/Panasza:" Grid.Row="5" VerticalOptions="End"
+                       FontSize="20"
+                       TextColor="Orange"
+                       FontAttributes="Bold"/>
+                <Frame CornerRadius="10" Grid.Row="6" Padding="6" Grid.ColumnSpan="2">
+                    <Editor Text="{Binding questionContent}"/>
+                </Frame>
+                <Button VerticalOptions="Center"                        
+                           Grid.Row="8"
+                           Grid.ColumnSpan="2"
+                           Text="Kérdés, Panasz elküldése" 
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           Padding="0"
+                           Margin="30,0,30,0"
+                        Command="{Binding supportCommand}"/>
+
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

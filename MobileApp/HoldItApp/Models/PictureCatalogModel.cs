@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HoldItApp.Models
 {
-    public class PictureModel
+    public class PictureCatalogModel
     {
         public int id { get; set; }
         public string url { get; set; }        

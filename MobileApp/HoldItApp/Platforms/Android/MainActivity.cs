@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
 
 namespace HoldItApp
 {
@@ -11,6 +12,10 @@ namespace HoldItApp
         {
             base.OnCreate(savedInstanceState);
             RequestedOrientation = ScreenOrientation.Portrait;
+
+            Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
         }
     }
 }

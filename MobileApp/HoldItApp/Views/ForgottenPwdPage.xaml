@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:HoldItApp.ViewModels"
+             x:Class="HoldItApp.Views.ForgottenPwdPage"
+             Title="ForgottenPwdPage">
+    <ContentPage.BindingContext>
+            <viewmodels:RegisterViewModel/>
+        </ContentPage.BindingContext>
+
+        <ContentPage.Resources>
+            <Style TargetType="Label" x:Key="errorMessage">
+                <Setter Property="TextColor" Value="Red"/>
+                <Setter Property="Margin" Value="10,20,0,0"/>
+            </Style>
+        </ContentPage.Resources>
+
+        <VerticalStackLayout Padding="10">
+        <Image Source="holditlogo" HorizontalOptions="Center"/>
+            <Label Text="Elfelejtett jelszó"
+             FontSize="30"
+             FontAttributes="Bold"
+             Margin="0,0,0,20"
+             HorizontalOptions="Center"/>
+
+            <Label Text="E-mail cím:"/>
+            <Frame CornerRadius="10" Padding="3" Margin="0,10,0,15">
+                <Entry FontSize="18" Placeholder="E-mail cím" Margin="5,0,5,0"
+             Text="{Binding resetEmail}"/>
+            </Frame>
+
+
+            <Button Text="Jelszó visszaállítás igénylése" FontSize="19" FontAttributes="Bold" Margin="0,10,0,15" Command="{Binding resetPwdCommand}"/>
+            <Label Text="{Binding errorMessage}" Style="{StaticResource errorMessage}"/>
+        </VerticalStackLayout>
+</ContentPage>

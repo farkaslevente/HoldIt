@@ -1,4 +1,5 @@
 using HoldItApp.ViewModels;
+
 namespace HoldItApp.Views;
 
 public partial class HomePage : ContentPage
@@ -22,10 +23,48 @@ public partial class HomePage : ContentPage
         });
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private void TakePicture_Clicked(object sender, EventArgs e)
     {
         SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
-        //testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+        testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
        BRDShowcase.ZIndex = 1;
+    }
+
+    private void torchBTN_Clicked(object sender, EventArgs e)
+    {
+        cameraView.TorchEnabled = !cameraView.TorchEnabled;
+        if (cameraView.TorchEnabled == true)
+        {
+            torchBTN.Source = "torchactivated.svg";
+        } else {
+            torchBTN.Source = "torchdeactivated.svg";
+        }
+        
+    }
+
+    private async void saveImageBTN_Clicked(object sender, EventArgs e)
+    {
+        //tobe done tomorrow
+        await cameraView.SaveSnapShot(Camera.MAUI.ImageFormat.PNG,"");
+    }
+
+    private async void profileBTN_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(LoginPage));
+    }
+
+    private async void followedBTN_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(FollowedPage));
+    }
+
+    private async void timelineBTN_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(TimelinePage));
+    }
+
+    private async void settingsBTN_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(SettingsPage));
     }
 }
