@@ -13,9 +13,9 @@ namespace HoldItApp
             base.OnCreate(savedInstanceState);
             RequestedOrientation = ScreenOrientation.Portrait;
 
-            Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
-            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
-            Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
+            //Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
+            //Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            Window.SetStatusBarColor(Android.Graphics.Color.Black);
         }
     }
 }

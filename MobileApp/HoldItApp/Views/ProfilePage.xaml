@@ -4,7 +4,8 @@
              xmlns:vm="clr-namespace:HoldItApp.ViewModels"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="HoldItApp.Views.ProfilePage"
-             Title="ProfilePage">
+             Title="ProfilePage"
+             Shell.NavBarIsVisible="False">
     <ContentPage.BindingContext>
         <vm:ProfilePageViewModel/>
     </ContentPage.BindingContext>
@@ -27,7 +28,7 @@
                         StrokeShape="RoundRectangle 100">
 
                             <svg:SvgCachedImage x:Name="IMGProfielPic"  
-                           Source="{Binding profile.pPic}"
+                           Source="{Binding user.pPic}"
                            Aspect="AspectFill"/>
                         </Border>
                     </Grid>
@@ -41,28 +42,19 @@
                     <Label x:Name="NameLB" 
                            Grid.Row="1" 
                            Grid.Column="1"
-                           Text="{Binding profile.name}"  
+                           Text="{Binding user.name}"  
                            HorizontalTextAlignment="Center"
                            FontSize="Large"
                            MaximumWidthRequest="165"/>
-                    <ImageButton x:Name="ProfilePicChangeBTN" 
-                                 Source="changepp.svg"                           
-                                 Grid.Row="1" 
-                                 Grid.Column="1"
-                                 MaximumHeightRequest="35"
-                                 MaximumWidthRequest="35"                          
-                                 VerticalOptions="End"
-                                 Clicked="ProfilePicChangeBTN_Clicked"
-                                 IsVisible="{Binding editVisibility}"/>
                 </StackLayout>
             </Grid>
         </VerticalStackLayout>
         <Button Grid.Row="1" HorizontalOptions="Center" x:Name="BTNLogout" Text="Kijelentkezés" Clicked="BTNLogout_Clicked"/>
         <Grid Grid.Row="3" Grid.ColumnSpan="3"
 ColumnDefinitions="*,*,*,*,*" Margin="0,0,0,10">
-            <ImageButton x:Name="BTNProfile" Source="profile.svg" Clicked="BTNProfile_Clicked" Grid.Column="0" IsVisible="{Binding LoggedInVisible}"/>
+            <!--<ImageButton x:Name="BTNProfile" Source="profile.svg" Clicked="BTNProfile_Clicked" Grid.Column="0" IsVisible="{Binding LoggedInVisible}"/>
             <ImageButton x:Name="BTNMainPage" Source="home.svg" Clicked="BTNMainPage_Clicked" Grid.Column="2"/>
-            <ImageButton x:Name="BTNSupport" Source="support.svg" Clicked="BTNSupport_Clicked" Grid.Column="4" IsVisible="{Binding LoggedInVisible}"/>
+            <ImageButton x:Name="BTNSupport" Source="support.svg" Clicked="BTNSupport_Clicked" Grid.Column="4" IsVisible="{Binding LoggedInVisible}"/>-->
         </Grid>
     </Grid>
 </ContentPage>

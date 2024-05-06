@@ -9,15 +9,9 @@ public partial class ProfilePage : ContentPage
     public bool InversVisibilityState { get; set; }
 
     public ProfilePage()
-    {
-        this.BindingContext = new ShellViewModel();
-        this.BindingContext = new ProfilePageViewModel();
-        vm = new ProfilePageViewModel();
-        vm.userChangeVisibility = false;
-        VisibilityState = false;
-        InversVisibilityState = true;
+    {                        
         InitializeComponent();
-
+        this.BindingContext = new ProfilePageViewModel();
     }
 
     private async void ProfilePicChangeBTN_Clicked(object sender, EventArgs e)

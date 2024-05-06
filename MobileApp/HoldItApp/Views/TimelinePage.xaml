@@ -9,20 +9,29 @@
         <viewmodels:TimelinePageViewModel/>
     </ContentPage.BindingContext>
     <ScrollView>
-        <CollectionView ItemsSource="{Binding posts}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid ColumnDefinitions="*,*" Margin="20">
-                        <Label Text="alma" FontSize="20" Grid.Column="{Binding gridColumn}" TextColor="Black" HeightRequest="50"/>
-                        <Border Grid.Column="{Binding gridColumn}" Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
-                            <VerticalStackLayout>
-                                <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
-                                <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="20" Margin="10" />
-                            </VerticalStackLayout>
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Grid RowDefinitions="*,50,20">
+            <CollectionView ItemsSource="{Binding posts}" Grid.Row="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*" Margin="20">
+                            <Label Text="alma" FontSize="20" Grid.Column="{Binding gridColumn}" TextColor="Black" HeightRequest="50"/>
+                            <Border Grid.Column="{Binding gridColumn}" Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
+                                <VerticalStackLayout>
+                                    <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
+                                    <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="20" Margin="10" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Grid Grid.Row="1" RowDefinitions="10,40" ColumnDefinitions="*,*,1.25*,*,*">
+                <ImageButton x:Name="profileBTN" Source="darkprofile.svg"   Clicked="profileBTN_Clicked"  Grid.Column="0" Grid.Row="1" />
+                <ImageButton x:Name="followedBTN" Source="darkmessages.svg" Clicked="followedBTN_Clicked" Grid.Column="1" Grid.Row="1" />
+                <ImageButton x:Name="uploadBTN" Source="add.svg" Clicked="followedBTN_Clicked" Grid.Column="2" Grid.RowSpan="2"/>
+                <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1"/>
+                <ImageButton x:Name="settingsBTN" Source="darksettings.svg" Clicked="settingsBTN_Clicked" Grid.Column="4" Grid.Row="1"/>
+            </Grid>
+        </Grid>
     </ScrollView>
 </ContentPage>
