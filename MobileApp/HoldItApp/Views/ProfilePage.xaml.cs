@@ -38,7 +38,7 @@ public partial class ProfilePage : ContentPage
         SecureStorage.Remove("userToken");
         ShellInstance.VisibilityLP();
         ShellInstance.LoggedInAdmin = false;
-        Shell.Current.GoToAsync(nameof(MainPage));
+        Shell.Current.GoToAsync(nameof(HomePage));
     }
 
     private async void BTNProfile_Clicked(object sender, EventArgs e)
@@ -62,7 +62,7 @@ public partial class ProfilePage : ContentPage
     }
     private async void BTNMainPage_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(MainPage));
+        await Shell.Current.GoToAsync(nameof(HomePage));
     }
 
     //private async void BTNFav_Clicked(object sender, EventArgs e)

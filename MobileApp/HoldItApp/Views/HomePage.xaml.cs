@@ -24,11 +24,26 @@ public partial class HomePage : ContentPage
         });
     }
 
-    private void TakePicture_Clicked(object sender, EventArgs e)
+    private async void TakePicture_Clicked(object sender, EventArgs e)
     {
-        SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
-        testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
-       BRDShowcase.ZIndex = 1;
+        // SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+        // testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+        //BRDShowcase.ZIndex = 1;
+        if (MediaPicker.Default.IsCaptureSupported)
+        {
+            FileResult myPhoto = await MediaPicker.Default.CapturePhotoAsync();
+            if (myPhoto != null)
+            {
+                string localFilePath = Path.Combine(FileSystem.CacheDirectory, myPhoto.FileName);
+                using Stream sourceStream = await myPhoto.OpenReadAsync();
+                using FileStream localFileStream = File.OpenWrite(localFilePath);
+                await sourceStream.CopyToAsync(localFileStream);
+            }
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Error", "It seems like your device isn't supported", "Go back");
+        }
     }
 
     private void torchBTN_Clicked(object sender, EventArgs e)
@@ -46,7 +61,8 @@ public partial class HomePage : ContentPage
     private async void saveImageBTN_Clicked(object sender, EventArgs e)
     {
         //tobe done tomorrow
-        await cameraView.SaveSnapShot(Camera.MAUI.ImageFormat.PNG,"");
+        await cameraView.SaveSnapShot(Camera.MAUI.ImageFormat.PNG,"DCIM/Camera");
+        BRDShowcase.ZIndex = -1;
     }
 
     private async void profileBTN_Clicked(object sender, EventArgs e)

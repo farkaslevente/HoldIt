@@ -17,7 +17,7 @@
                         <Border Grid.Column="{Binding gridColumn}" Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
                             <VerticalStackLayout>
                                 <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
-                                <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10"/>
+                                <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="20" Margin="10" />
                             </VerticalStackLayout>
                         </Border>
                     </Grid>

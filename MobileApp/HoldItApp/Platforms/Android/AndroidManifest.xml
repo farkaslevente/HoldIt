@@ -9,9 +9,8 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <queries>
-     <intent>
-       <action android:name="android.intent.action.SENDTO" />
-       <data android:scheme="mailto" />
-     </intent>
+    <intent>
+      <action android:name="android.media.action.IMAGE_CAPTURE" />      
+    </intent>    
    </queries>
 </manifest>
