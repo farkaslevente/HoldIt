@@ -28,7 +28,7 @@
             <Grid Grid.Row="1" RowDefinitions="10,40" ColumnDefinitions="*,*,1.25*,*,*">
                 <ImageButton x:Name="profileBTN" Source="darkprofile.svg"   Clicked="profileBTN_Clicked"  Grid.Column="0" Grid.Row="1" />
                 <ImageButton x:Name="followedBTN" Source="darkmessages.svg" Clicked="followedBTN_Clicked" Grid.Column="1" Grid.Row="1" />
-                <ImageButton x:Name="uploadBTN" Source="add.svg" Clicked="followedBTN_Clicked" Grid.Column="2" Grid.RowSpan="2"/>
+                <ImageButton x:Name="uploadBTN" Source="add.svg"            Clicked="uploadBTN_Clicked"   Grid.Column="2" Grid.RowSpan="2"/>
                 <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1"/>
                 <ImageButton x:Name="settingsBTN" Source="darksettings.svg" Clicked="settingsBTN_Clicked" Grid.Column="4" Grid.Row="1"/>
             </Grid>

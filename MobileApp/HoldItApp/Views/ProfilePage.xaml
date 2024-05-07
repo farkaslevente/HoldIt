@@ -49,12 +49,13 @@
                 </StackLayout>
             </Grid>
         </VerticalStackLayout>
-        <Button Grid.Row="1" HorizontalOptions="Center" x:Name="BTNLogout" Text="Kijelentkezés" Clicked="BTNLogout_Clicked"/>
         <Grid Grid.Row="3" Grid.ColumnSpan="3"
 ColumnDefinitions="*,*,*,*,*" Margin="0,0,0,10">
-            <!--<ImageButton x:Name="BTNProfile" Source="profile.svg" Clicked="BTNProfile_Clicked" Grid.Column="0" IsVisible="{Binding LoggedInVisible}"/>
-            <ImageButton x:Name="BTNMainPage" Source="home.svg" Clicked="BTNMainPage_Clicked" Grid.Column="2"/>
-            <ImageButton x:Name="BTNSupport" Source="support.svg" Clicked="BTNSupport_Clicked" Grid.Column="4" IsVisible="{Binding LoggedInVisible}"/>-->
+            <ImageButton x:Name="logoutBTN" Source="darklogout.svg"     Clicked="logoutBTN_Clicked"  Grid.Column="0" Grid.Row="1" />
+            <ImageButton x:Name="followedBTN" Source="darkmessages.svg" Clicked="followedBTN_Clicked" Grid.Column="1" Grid.Row="1" />
+            <ImageButton x:Name="uploadBTN" Source="add.svg"            Clicked="uploadBTN_Clicked" Grid.Column="2" Grid.RowSpan="2"/>
+            <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1"/>
+            <ImageButton x:Name="settingsBTN" Source="darksettings.svg" Clicked="settingsBTN_Clicked" Grid.Column="4" Grid.Row="1"/>
         </Grid>
     </Grid>
 </ContentPage>

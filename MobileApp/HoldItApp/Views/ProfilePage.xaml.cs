@@ -13,16 +13,11 @@ public partial class ProfilePage : ContentPage
         InitializeComponent();
         this.BindingContext = new ProfilePageViewModel();
     }
-
-    private async void ProfilePicChangeBTN_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(PPCatalogPage));
-    }
-
-    private void BTNLogout_Clicked(object sender, EventArgs e)
+    
+    private void logoutBTN_Clicked(object sender, EventArgs e)
     {
         ShellViewModel ShellInstance = new ShellViewModel();
-        DisplayAlert("Logout successful", "You logged out", "Rendben");
+        DisplayAlert("Logout successful", "Your profile was logged out", "Okay");
         SecureStorage.Remove("userName");
         SecureStorage.Remove("userEmail");
         SecureStorage.Remove("userImage");
@@ -35,32 +30,23 @@ public partial class ProfilePage : ContentPage
         Shell.Current.GoToAsync(nameof(HomePage));
     }
 
-    private async void BTNProfile_Clicked(object sender, EventArgs e)
+    private async void followedBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(ProfilePage));
+        await Shell.Current.GoToAsync(nameof(FollowedPage));
     }
 
-    private async void BTNLogin_Clicked(object sender, EventArgs e)
+    private async void uploadBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(LoginPage));
+        await Shell.Current.GoToAsync(nameof(PopUpUploadPage));
     }
 
-    //private async void BTNMyAds_Clicked(object sender, EventArgs e)
-    //{
-    //    await Shell.Current.GoToAsync(nameof(AdsPage));
-    //}
-
-    private async void BTNSupport_Clicked(object sender, EventArgs e)
+    private async void timelineBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(SupportPage));
-    }
-    private async void BTNMainPage_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(HomePage));
+        await Shell.Current.GoToAsync(nameof(TimelinePage));
     }
 
-    //private async void BTNFav_Clicked(object sender, EventArgs e)
-    //{
-    //    await Shell.Current.GoToAsync(nameof(FavPage));
-    //}   
+    private async void settingsBTN_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(SettingsPage));
+    }
 }

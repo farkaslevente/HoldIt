@@ -23,6 +23,7 @@ namespace HoldItApp
             Routing.RegisterRoute(nameof(ResetPwdCodePage), typeof(ResetPwdCodePage));
             Routing.RegisterRoute(nameof(ResetPwdFinalStagePage), typeof(ResetPwdFinalStagePage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+            Routing.RegisterRoute(nameof(PopUpUploadPage), typeof(PopUpUploadPage));
 
             Routing.RegisterRoute(nameof(PageTester), typeof(PageTester));
 

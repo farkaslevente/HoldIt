@@ -47,5 +47,8 @@ public partial class TimelinePage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(SettingsPage));
     }
-
+    private async void uploadBTN_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(PopUpUploadPage));
+    }
 }
