@@ -12,7 +12,6 @@ using System.IdentityModel.Tokens.Jwt;
 using HoldItApp.ViewModels;
 using System.Net.Http.Headers;
 using FFImageLoading.Args;
-//using MySqlX.XDevAPI;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
 
@@ -22,13 +21,9 @@ namespace HoldItApp.Services
 {
     public class DataService
     {
-        public static ObservableCollection<PostModel> posts { get; set; } = new ObservableCollection<PostModel>();
-        //public struct T
-        //{
-        //    string token;
-        //}        
+        public static ObservableCollection<PostModel> posts { get; set; } = new ObservableCollection<PostModel>();             
         
-        public static string url = "http://192.168.0.165:9000";                     //Your IP address and PORT number must be here like the example one row above
+        public static string url = "http://192.168.0.165:9000";            //Your IP address and PORT number must be here like the example one row above
 
 //   __________ ____  ____ 
 //  /_ __/ __ \/ __ \/ __ \
@@ -37,7 +32,7 @@ namespace HoldItApp.Services
 // /_/ \____/_____/\____/  
 // temporary upload that can give imgUrl back if user wants to really upload the picture
 // a delete function for said temp. upload
-// last progress in HomePageView line 45
+// 
 
         // _    _                                     _               
         //| |  | |                                   (_)              
@@ -442,9 +437,7 @@ namespace HoldItApp.Services
                 return JsonConvert.DeserializeObject<List<string>>(result);
             }
         }
-       
-     
-
+           
         public static async Task<string> newPostUpload(string imgUrl, string comment, int ownerId)
         {
             string jsonData = JsonConvert.SerializeObject(new {
@@ -457,7 +450,7 @@ namespace HoldItApp.Services
             string token = await SecureStorage.GetAsync("userToken");
             client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await client.PostAsync(url + "/ads/post", content);
+            HttpResponseMessage response = await client.PostAsync(url + "/uploads/post", content);
             string result = await response.Content.ReadAsStringAsync();
 
             if ((int)response.StatusCode == 401)
@@ -536,8 +529,8 @@ namespace HoldItApp.Services
             var uploadFile = await MediaPicker.PickPhotoAsync();
 
             if (uploadFile == null) return "error";
-
-            var httpContent = new MultipartFormDataContent();         
+           
+                var httpContent = new MultipartFormDataContent();         
             string[] fileType = uploadFile.FileName.Split('.');
             uploadFile.FileName = $"{userId}_{postId}_{imgId}.{fileType[1]}";
             httpContent.Add(new StreamContent(await uploadFile.OpenReadAsync()), "file", uploadFile.FileName);
@@ -550,6 +543,15 @@ namespace HoldItApp.Services
             var response = await result.Content.ReadAsStringAsync();
             //await Shell.Current.DisplayAlert("Response from server", response, "K");
             await SecureStorage.SetAsync("imgId", imgId.ToString());
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                using (Stream stream = await uploadFile.OpenReadAsync())
+                {
+                    await stream.CopyToAsync(memoryStream);
+                }
+                byte[] imageData = memoryStream.ToArray();
+                PopUpViewModel.imageData = imageData;
+            }
             return uploadFile.FileName;
         }
         public class TokenResponse

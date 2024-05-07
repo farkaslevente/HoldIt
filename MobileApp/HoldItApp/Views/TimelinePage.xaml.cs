@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using HoldItApp.ViewModels;
 using Microsoft.IdentityModel.Tokens;
 
@@ -47,8 +48,8 @@ public partial class TimelinePage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(SettingsPage));
     }
-    private async void uploadBTN_Clicked(object sender, EventArgs e)
+    private void uploadBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(PopUpUploadPage));
+        Shell.Current.ShowPopup(new PopUpUploadPage());
     }
 }
