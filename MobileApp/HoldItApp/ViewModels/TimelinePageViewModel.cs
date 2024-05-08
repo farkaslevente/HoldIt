@@ -1,5 +1,7 @@
-﻿using HoldItApp.Models;
+﻿using CommunityToolkit.Maui.Views;
+using HoldItApp.Models;
 using HoldItApp.Services;
+using HoldItApp.Views;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -8,12 +10,15 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HoldItApp.ViewModels
 {
     public class TimelinePageViewModel: BindableObject
     {
         public ObservableCollection<PostModel> posts { get; set; }
+        public PostModel selectedPost { get; set; }
+        public ICommand infoCommand { get; set; }
         public bool first { get; set; }
         private System.Timers.Timer _refreshTimer;
         public TimelinePageViewModel()
@@ -21,7 +26,14 @@ namespace HoldItApp.ViewModels
             first = true;
             posts = new ObservableCollection<PostModel>();
             getAllPosts();
-            
+            infoCommand = new Command(async () =>
+            {
+                if (selectedPost == null) return;
+                Shell.Current.ShowPopup(new PopUpDetailsPage(selectedPost));
+
+                selectedPost = null;
+                OnPropertyChanged(nameof(selectedPost));
+            });
             
             
         }
@@ -41,22 +53,24 @@ namespace HoldItApp.ViewModels
             List<PostModel> postsToAdd = new List<PostModel>();
 
             foreach (var fn in list)
-            {               
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    userId = "0";
+                }
                 if (!posts.Any(item => item.id == fn.id))
                 {
                     UserModel owner = await DataService.getProfileById(fn.ownerId);
                     fn.ownerPic = owner.pPic;
 
                     string[] butcheredDate = fn.time.Split(" ");
-                    fn.time = $"{butcheredDate[3]}. {butcheredDate[1]}. {butcheredDate[2]}.";
+                    fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";
 
-                    if (userId.IsNullOrEmpty())
-                    {
-                        userId = "0";
-                    }
+                   
                     fn.gridColumn = fn.ownerId == Int32.Parse(userId) ? 1 : 0;
                     fn.messageColor = fn.ownerId == Int32.Parse(userId) ? Colors.Blue : Colors.Black;
-                    fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;                    
+                    fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;   
+                    fn.ownerName = owner.name;
                                      
                     fn.textColor = Colors.White;
 
@@ -80,6 +94,10 @@ namespace HoldItApp.ViewModels
         private async void getAllPosts()
         {
             string userId = await SecureStorage.GetAsync("userId");
+            if (userId.IsNullOrEmpty())
+            {
+                userId = "0";
+            }
             posts.Clear();
             IEnumerable<PostModel> list = await DataService.getPosts();
             list.ToList().ForEach(async fn =>
@@ -87,13 +105,11 @@ namespace HoldItApp.ViewModels
                 UserModel owner = await DataService.getProfileById(fn.ownerId);
                 fn.ownerPic = owner.pPic;
                 fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;
+                fn.ownerName = owner.name;
                 string[] butcheredDate = fn.time.Split(" ");
-                fn.time = $"{butcheredDate[3]}. {butcheredDate[1]}. {butcheredDate[2]}.";
-                
-                if (userId.IsNullOrEmpty())
-                {
-                    userId = "0";
-                }
+                fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";
+
+
                 fn.gridColumn = 0;
                 fn.messageColor = Colors.Black;
                 fn.textColor = Colors.White;

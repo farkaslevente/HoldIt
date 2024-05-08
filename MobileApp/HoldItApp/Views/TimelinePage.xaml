@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:HoldItApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="HoldItApp.Views.TimelinePage"
              Title=""
@@ -10,27 +11,48 @@
         <viewmodels:TimelinePageViewModel/>
     </ContentPage.BindingContext>
     <Grid RowDefinitions="*,50,20">
-    <ScrollView Margin="0,0,0,0">
+    <ScrollView Margin="0,0,0,0" VerticalScrollBarVisibility="Never" x:Name="MyScrollView">
         <Grid RowDefinitions="*">
-            <CollectionView ItemsSource="{Binding posts}" Grid.Row="0" Margin="0,10,0,0" ItemsUpdatingScrollMode="KeepLastItemInView">
+            <CollectionView ItemsSource="{Binding posts}" 
+                            Grid.Row="0" 
+                            Margin="0,10,0,0" 
+                            SelectionMode="Single" 
+                            SelectionChangedCommand="{Binding infoCommand}"
+                            SelectedItem="{Binding selectedPost}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="*,*" Margin="0">
-                            <Grid Grid.Column="{Binding gridColumn}" ColumnDefinitions="20,*,20">
-                                <VerticalStackLayout Grid.Column="1">
+                            <Grid ColumnDefinitions="*,*" Margin="0,10,0,10">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid Grid.Column="{Binding gridColumn}" ColumnDefinitions="20,*,20">
+                                    <!--<Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>-->
+                                    <VerticalStackLayout Grid.Column="1">
                                     <Label  Text="{Binding time}" FontSize="12" TextColor="Black"/>
 
                                         <Border Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
                                             <VerticalStackLayout>
                                                 <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
+
                                                 <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10" />
                                             </VerticalStackLayout>
                                         </Border>
+                                        <Label Text="{Binding ownerName}" FontSize="12" TextColor="Black"/>
                                     </VerticalStackLayout>
                                     <Border StrokeShape="RoundRectangle 10"  Grid.Column="{Binding ownerPicPos}" MaximumHeightRequest="20" VerticalOptions="End">
-                                        <svg:SvgCachedImage x:Name="IMGProfielPic"  
+                                        <svg:SvgCachedImage 
                                                 Source="{Binding ownerPic}"
-                                                Aspect="AspectFill"/>
+                                                Aspect="AspectFill">
+                                        </svg:SvgCachedImage>
                                     </Border>
                                 </Grid>
                         </Grid>

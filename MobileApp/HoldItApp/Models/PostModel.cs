@@ -13,6 +13,7 @@ namespace HoldItApp.Models
         public string time { get; set; }
         public string comment { get; set; }
         public int ownerId { get; set; }
+        public string ownerName { get; set; }
         public string ownerPic { get; set; }
         public int ownerPicPos { get; set; }
         public int gridColumn { get; set; }

@@ -24,56 +24,12 @@ public partial class HomePage : ContentPage
         });
     }
 
-    private async void TakePicture_Clicked(object sender, EventArgs e)
+    private void TakePicture_Clicked(object sender, EventArgs e)
     {
         SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
         testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
         BRDShowcase.ZIndex = 1;
-        //if (MediaPicker.Default.IsCaptureSupported)
-        //{
-        //    FileResult myPhoto = await MediaPicker.Default.CapturePhotoAsync();
-        //    if (myPhoto != null)
-        //    {
-        //        string localFilePath = Path.Combine(FileSystem.CacheDirectory, myPhoto.FileName);
-        //        using Stream sourceStream = await myPhoto.OpenReadAsync();
-        //        using FileStream localFileStream = File.OpenWrite(localFilePath);
-        //        await sourceStream.CopyToAsync(localFileStream);
-        //    }
-        //}
-        //else
-        //{
-        //    await Shell.Current.DisplayAlert("Error", "It seems like your device isn't supported", "Go back");
-        //}
-
-        //try
-        //{
-        //    var snapshot = await cameraView.GetSnapshotAsync();
-
-        //    if (snapshot != null)
-        //    {
-        //        // Save the snapshot to the device's storage
-        //        var photoPath = Path.Combine(FileSystem.CacheDirectory, "snapshot.png");
-        //        using (var stream = new FileStream(photoPath, FileMode.Create))
-        //        {
-        //            await stream.WriteAsync(snapshot);
-        //        }
-
-        //        // Save the photo to the device's gallery
-        //        await MediaGallery.SaveToGallery(photoPath);
-
-        //        // Display success message
-        //        await Shell.Current.DisplayAlert("Success", "Snapshot saved to gallery successfully", "OK");
-        //    }
-        //    else
-        //    {
-        //        await Shell.Current.DisplayAlert("Error", "Failed to capture snapshot", "OK");
-        //    }
-        //}
-        //catch (Exception ex)
-        //{
-        //    // Handle exception
-        //    await Shell.Current.DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
-        //}
+       
     }
 
     private void torchBTN_Clicked(object sender, EventArgs e)

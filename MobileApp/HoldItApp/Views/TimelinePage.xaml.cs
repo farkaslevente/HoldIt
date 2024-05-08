@@ -1,15 +1,20 @@
 using CommunityToolkit.Maui.Views;
+using HoldItApp.Models;
+using HoldItApp.Services;
 using HoldItApp.ViewModels;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.ObjectModel;
 
 namespace HoldItApp.Views;
 
 public partial class TimelinePage : ContentPage
 {
-	public TimelinePage()
+    public ObservableCollection<PostModel> posts { get; set; }
+    public TimelinePage()
 	{
 		InitializeComponent();
-	}
+        posts = new ObservableCollection<PostModel>();
+    }
 
     private async void profileBTN_Clicked(object sender, EventArgs e)
     {
@@ -51,5 +56,5 @@ public partial class TimelinePage : ContentPage
     private void uploadBTN_Clicked(object sender, EventArgs e)
     {
         Shell.Current.ShowPopup(new PopUpUploadPage());
-    }
+    }        
 }
