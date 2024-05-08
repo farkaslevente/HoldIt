@@ -69,8 +69,7 @@ namespace HoldItApp.ViewModels
                 else
                 {
                     imageId = int.Parse(await SecureStorage.GetAsync("imgId")) + 1;
-                    UploadedImgUrl = $"{DataService.url}/uploads/{response}";
-                    //PopUpUploadPage.showCaseIMG.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+                    UploadedImgUrl = $"{DataService.url}/uploads/{response}";                    
                 }
             });
             uploadCommand = new Command(async () =>

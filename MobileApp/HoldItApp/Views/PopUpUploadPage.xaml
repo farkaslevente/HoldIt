@@ -9,7 +9,7 @@
             <Entry Text="{Binding comment}"/>
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
                 <Button Grid.Column="0" Text="Go back" Margin="5" Grid.Row="0"/>
-                <Button Grid.ColumnSpan="2" Text="Upload post" Margin="5" Grid.Row="1" Command="{Binding uploadCommand}"/>
+                <Button Grid.ColumnSpan="2" Text="Upload post" Margin="5" Grid.Row="1" Command="{Binding uploadCommand}"  Clicked="Button_Clicked"/>
                 <Button Grid.Column="1" Text="Upload your image" Margin="5" Grid.Row="0" Command="{Binding imageUploadCommand}"/>
             </Grid>
         </VerticalStackLayout>

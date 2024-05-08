@@ -21,4 +21,9 @@ public partial class PopUpUploadPage : Popup
     {
         showCaseIMG.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        Close();
+    }
 }
