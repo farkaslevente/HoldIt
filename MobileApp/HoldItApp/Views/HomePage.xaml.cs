@@ -26,9 +26,9 @@ public partial class HomePage : ContentPage
 
     private async void TakePicture_Clicked(object sender, EventArgs e)
     {
-        // SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
-        // testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
-        //BRDShowcase.ZIndex = 1;
+        SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+        testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+        BRDShowcase.ZIndex = 1;
         //if (MediaPicker.Default.IsCaptureSupported)
         //{
         //    FileResult myPhoto = await MediaPicker.Default.CapturePhotoAsync();

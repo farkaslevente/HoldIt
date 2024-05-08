@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:HoldItApp.ViewModels"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="HoldItApp.Views.TimelinePage"
              Title=""
              Shell.NavBarIsVisible="False">
@@ -27,7 +28,9 @@
                                         </Border>
                                     </VerticalStackLayout>
                                     <Border StrokeShape="RoundRectangle 10"  Grid.Column="{Binding ownerPicPos}" MaximumHeightRequest="20" VerticalOptions="End">
-                                    <ImageButton Source="{Binding ownerPic}"/>
+                                        <svg:SvgCachedImage x:Name="IMGProfielPic"  
+                                                Source="{Binding ownerPic}"
+                                                Aspect="AspectFill"/>
                                     </Border>
                                 </Grid>
                         </Grid>
