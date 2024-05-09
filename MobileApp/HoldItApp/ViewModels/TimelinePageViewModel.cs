@@ -71,7 +71,7 @@ namespace HoldItApp.ViewModels
                     fn.messageColor = fn.ownerId == Int32.Parse(userId) ? Colors.Blue : Colors.Black;
                     fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;   
                     fn.ownerName = owner.name;
-                                     
+                    fn.ownerNamePos = fn.ownerId == Int32.Parse(userId) ? "End" : "Start";
                     fn.textColor = Colors.White;
 
                     if (fn.imgUrl.IsNullOrEmpty())
@@ -106,6 +106,7 @@ namespace HoldItApp.ViewModels
                 fn.ownerPic = owner.pPic;
                 fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;
                 fn.ownerName = owner.name;
+                fn.ownerNamePos = fn.ownerId == Int32.Parse(userId) ? "End" : "Start";
                 string[] butcheredDate = fn.time.Split(" ");
                 fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";
 

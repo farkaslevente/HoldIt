@@ -431,7 +431,7 @@ namespace HoldItApp.Services
                 client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
                 client.BaseAddress = new Uri(url);
-                var uri = "/pictures/upload";
+                var uri = "/uploads/upload";
                 var result = await client.GetStringAsync(uri);
 
                 return JsonConvert.DeserializeObject<List<string>>(result);

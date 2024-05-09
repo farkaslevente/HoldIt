@@ -65,18 +65,25 @@ namespace HoldItApp.ViewModels
                     {
                         if (regPassword == regConfirmPwd)
                         {
-                            error = "";
+                            if (regPassword.Length >= 8)
+                            {
+                                error = "";
 
-                            regModel = new RegisterModel
+                                regModel = new RegisterModel
+                                {
+                                    name = regName,
+                                    email = regEmail,
+                                    pwd = regPassword
+                                };
+                                errorMessage = await DataService.register(regModel);
+                                if (errorMessage.email == null)
+                                {
+                                    await Shell.Current.GoToAsync(nameof(LoginPage));
+                                }
+                            }
+                            else
                             {
-                                name = regName,
-                                email = regEmail,
-                                pwd = regPassword
-                            };
-                            errorMessage = await DataService.register(regModel);
-                            if (errorMessage.email == null)
-                            {
-                                await Shell.Current.GoToAsync(nameof(MainPage));
+                                error = "Your password is too short";
                             }
                         }
                         else

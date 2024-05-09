@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using HoldItApp.ViewModels;
 
 namespace HoldItApp.Views;
@@ -9,11 +10,17 @@ public partial class ProfilePage : ContentPage
     public bool InversVisibilityState { get; set; }
 
     public ProfilePage()
-    {                        
+    {
+        fromPP();
         InitializeComponent();
         this.BindingContext = new ProfilePageViewModel();
     }
-    
+
+    private async Task fromPP()
+    {
+        await SecureStorage.SetAsync("fromPP", false.ToString());
+    }
+
     private void logoutBTN_Clicked(object sender, EventArgs e)
     {
         ShellViewModel ShellInstance = new ShellViewModel();
@@ -37,7 +44,8 @@ public partial class ProfilePage : ContentPage
 
     private async void uploadBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(PopUpUploadPage));
+        await SecureStorage.SetAsync("fromPP", true.ToString());
+        Shell.Current.ShowPopup(new PopUpUploadPage());        
     }
 
     private async void timelineBTN_Clicked(object sender, EventArgs e)

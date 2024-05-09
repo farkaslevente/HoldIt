@@ -1,5 +1,6 @@
 using HoldItApp.ViewModels;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace HoldItApp.Views;
 
@@ -24,12 +25,12 @@ public partial class HomePage : ContentPage
         });
     }
 
-    private void TakePicture_Clicked(object sender, EventArgs e)
+    private async void TakePicture_Clicked(object sender, EventArgs e)
     {
         SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
         testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
-        BRDShowcase.ZIndex = 1;
-       
+        await BRDShowcase.TranslateTo(0, -800, 300);
+
     }
 
     private void torchBTN_Clicked(object sender, EventArgs e)
@@ -92,5 +93,10 @@ public partial class HomePage : ContentPage
     private async void PageTesterBTN_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(PageTester));
+    }
+
+    private async void searchBTN_Clicked(object sender, EventArgs e)
+    {
+        await BRDShowcase.TranslateTo(0, 100, 300);
     }
 }

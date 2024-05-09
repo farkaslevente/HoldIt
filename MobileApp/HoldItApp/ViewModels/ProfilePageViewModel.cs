@@ -1,6 +1,8 @@
-﻿using HoldItApp.Models;
+﻿using CommunityToolkit.Maui.Views;
+using HoldItApp.Models;
 using HoldItApp.Services;
 using HoldItApp.Views;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,100 +15,65 @@ namespace HoldItApp.ViewModels
 {
     public class ProfilePageViewModel : BindableObject
     {
-        public ICommand userUpdateCommand { get; set; }
+        public ICommand postDetailCommand { get; set; }
         public ObservableCollection<UserModel> users { get; set; }
+        public ObservableCollection<PostModel> posts { get; set; }
         public UserModel user { get; set; }
-        public string newUserName { get; set; }
-        public string newUserEmail { get; set; }        
-        public string updateError { get; set; }
-        private bool _editVisibility;
-
-        public bool editVisibility
-        {
-            get => _editVisibility;
-            set
-            {
-                if (_editVisibility != value)
-                {
-                    _editVisibility = value;
-                    OnPropertyChanged(nameof(editVisibility));
-                }
-            }
-        }
-        private bool _editVisibilityInvers;
-
-        public bool editVisibilityInvers
-        {
-            get => _editVisibilityInvers;
-            set
-            {
-                if (_editVisibilityInvers != value)
-                {
-                    _editVisibilityInvers = value;
-                    OnPropertyChanged(nameof(editVisibilityInvers));
-                }
-            }
-        }
-        public bool _userChangeVisibility { get; set; }
-        public bool userChangeVisibility
-        {
-            get => _userChangeVisibility;
-            set
-            {
-                if (_userChangeVisibility != value)
-                {
-                    _userChangeVisibility = value;
-                    OnPropertyChanged(nameof(userChangeVisibility));
-                }
-            }
-        }
-        public ICommand userEditCommand { get; set; }
+        public ObservableCollection<string> userImages { get; set; }
+        public string selectedimgUrl { get; set; }
+        public PostModel selectedPost { get; set; }
+        
         public ProfilePageViewModel()
         {
-            users = new ObservableCollection<UserModel>();            
-            a();            
-            editVisibility = false;
-            editVisibilityInvers = !editVisibility;            
-            userEditCommand = new Command(async () =>
+            
+            users = new ObservableCollection<UserModel>();
+            posts = new ObservableCollection<PostModel>();
+            userImages = new ObservableCollection<string>();
+            a();
+            
+            postDetailCommand = new Command(async () =>
             {
-                editVisibility = true;
-                editVisibilityInvers = !editVisibility;
-            });
-
-            userUpdateCommand = new Command(async () =>
-            {
-                int UserId = Int32.Parse(await SecureStorage.GetAsync("userId"));
-                user = await DataService.getProfileById(UserId);
                 
-                if (string.IsNullOrEmpty(newUserEmail))
+                foreach (var post in posts)
                 {
-                    newUserEmail = user.email;
+                    if (post.imgUrl == selectedimgUrl)
+                    {
+                        selectedPost = post;
+                        break;
+                    }
                 }
-                if (!string.IsNullOrEmpty(newUserName))
-                {
-                    user.name = newUserName;
-                }
+                if (selectedPost == null) return;                
+                Shell.Current.ShowPopup(new PopUpDetailsPage(selectedPost));
 
-                if (!string.IsNullOrEmpty(newUserEmail) && newUserEmail.Contains('@'))
-                {
-                    user.email = newUserEmail;
-
-                }
-                else if (!newUserEmail.Contains('@'))
-                {
-                    updateError = "Please provide a real email address";
-                }               
-                string UserPic = await SecureStorage.GetAsync("userImage");
-                string userFollowed = await SecureStorage.GetAsync("userFollowed");
-                int userRole = Int32.Parse(await SecureStorage.GetAsync("userRole"));
-                await DataService.profileUpdate(user.id, user.name, user.email, user.pPic, userRole, userFollowed);
-                await Shell.Current.GoToAsync(nameof(ProfilePage));
+                selectedPost = null;
+                OnPropertyChanged(nameof(selectedPost));
             });
-        }       
+        }
+
+        private async Task getAllPosts()
+        {
+            string userId = await SecureStorage.GetAsync("userId");                       
+            IEnumerable<PostModel> list = await DataService.getPosts();
+            foreach (var fn in list)
+            {
+                if (fn.ownerId == Int32.Parse(userId))
+                {
+                    UserModel owner = await DataService.getProfileById(fn.ownerId);
+                    fn.ownerPic = owner.pPic;
+                    fn.ownerName = owner.name;
+                    //string[] butcheredDate = fn.time.Split(" ");
+                    //fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";                        
+                    posts.Add(fn);
+                }               
+            }
+            
+        }
 
         private async void a()
         {
-            await GetuserData();
+            await getAllPosts();
+             getAllUploads();
+             GetuserData();
         }
 
         private async Task GetuserData()
@@ -128,14 +95,22 @@ namespace HoldItApp.ViewModels
                     id = userId,                    
                 };
                 OnPropertyChanged(nameof(user));
-            }
-
-
-
+            }      
+            
         }
-        public ICommand openUrlCommand =>
-        new Command<string>(async (url) => await Launcher.OpenAsync(url));        
-
+        public async Task getAllUploads()
+        {
+            userImages.Clear();
+            int userId = Int32.Parse(await SecureStorage.GetAsync("userId"));
+            IEnumerable<string> list = await DataService.getUploads();
+            list.ToList().ForEach(fn => {
+                if (fn.Split('_')[0] == userId.ToString())
+                {
+                    userImages.Add($"{DataService.url}/uploads/{fn}");
+                }
+                
+            });
+        }
     }
 
 }

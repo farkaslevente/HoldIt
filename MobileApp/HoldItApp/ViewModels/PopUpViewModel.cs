@@ -86,7 +86,15 @@ namespace HoldItApp.ViewModels
                                                    );                
                 if (await SecureStorage.GetAsync("uploaded") == true.ToString())
                 {
-                    await Shell.Current.GoToAsync(nameof(TimelinePage));
+                    if (await SecureStorage.GetAsync("fromPP") == true.ToString())
+                    {
+                        await Shell.Current.GoToAsync(nameof(ProfilePage));
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync(nameof(TimelinePage));
+                    }
+                    
                 }
             });           
         }

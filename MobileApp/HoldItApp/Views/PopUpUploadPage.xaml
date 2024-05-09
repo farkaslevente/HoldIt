@@ -5,12 +5,12 @@
              x:Class="HoldItApp.Views.PopUpUploadPage">
     <Border StrokeShape="RoundRectangle 30">
         <VerticalStackLayout Margin="10">
-            <Image x:Name="showCaseIMG" MaximumHeightRequest="400" MinimumHeightRequest="200"/>
+            <Image x:Name="showCaseIMG" MaximumHeightRequest="300" MinimumHeightRequest="200"/>
             <Entry Text="{Binding comment}"/>
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
                 <Button Grid.Column="0" Text="Go back" Margin="5" Grid.Row="0"/>
                 <Button Grid.ColumnSpan="2" Text="Upload post" Margin="5" Grid.Row="1" Command="{Binding uploadCommand}"  Clicked="Button_Clicked"/>
-                <Button Grid.Column="1" Text="Upload your image" Margin="5" Grid.Row="0" Command="{Binding imageUploadCommand}"/>
+                <Button Grid.Column="1" Text="Image&#10;Upload" Margin="5" Grid.Row="0" Command="{Binding imageUploadCommand}"/>
             </Grid>
         </VerticalStackLayout>
     </Border>
