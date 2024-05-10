@@ -20,20 +20,61 @@ namespace HoldItApp.ViewModels
         public ObservableCollection<PostModel> posts { get; set; }
         public UserModel user { get; set; }
         public ObservableCollection<string> userImages { get; set; }
+        public ObservableCollection<UserModel> resultUsers { get; set; }
+        public ObservableCollection<PostModel> resultPosts { get; set; }
         public string selectedimgUrl { get; set; }
         public PostModel selectedPost { get; set; }
-        
+        private string _searchParam;
+        public string searchParam
+        {
+            get => _searchParam;
+            set
+            {
+                _searchParam = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand SearchCommand { get; set; }
         public ProfilePageViewModel()
         {
-            
+            resultUsers = new ObservableCollection<UserModel>();
+            resultPosts = new ObservableCollection<PostModel>();
             users = new ObservableCollection<UserModel>();
             posts = new ObservableCollection<PostModel>();
             userImages = new ObservableCollection<string>();
             a();
-            
-            postDetailCommand = new Command(async () =>
+
+            SearchCommand = new Command(async () =>
             {
-                
+                await getUsers();
+                await getAllPosts();
+                resultUsers.Clear();
+                resultPosts.Clear();
+                foreach (var user in users)
+                {
+                    if (user.name.Contains(searchParam))
+                    {
+                        resultUsers.Add(user);
+                    }
+                }
+
+                foreach (var post in posts)
+                {
+                    if (post.comment.Contains(searchParam))
+                    {
+                        resultPosts.Add(post);
+                    }
+                }               
+                await Shell.Current.GoToAsync(nameof(SearchResultPage),
+                    new Dictionary<string, object> { 
+                        { "resultsUsers",  resultUsers},
+                        { "resultPosts", resultPosts} 
+                    });
+            });
+            postDetailCommand = new Command( async() =>
+            {
+                await getAllPosts();
                 foreach (var post in posts)
                 {
                     if (post.imgUrl == selectedimgUrl)
@@ -60,9 +101,7 @@ namespace HoldItApp.ViewModels
                 {
                     UserModel owner = await DataService.getProfileById(fn.ownerId);
                     fn.ownerPic = owner.pPic;
-                    fn.ownerName = owner.name;
-                    //string[] butcheredDate = fn.time.Split(" ");
-                    //fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";                        
+                    fn.ownerName = owner.name;                    
                     posts.Add(fn);
                 }               
             }
@@ -71,37 +110,26 @@ namespace HoldItApp.ViewModels
 
         private async void a()
         {
-            await getAllPosts();
-             getAllUploads();
-             GetuserData();
+             await getAllUploads();             
         }
 
-        private async Task GetuserData()
+        private async Task getUsers()
         {
-            string userName = await SecureStorage.GetAsync("userName");
-            string userEmail = await SecureStorage.GetAsync("userEmail");
-            string userImage = await SecureStorage.GetAsync("userImage");
-            string tempUserId = await SecureStorage.GetAsync("userId");
+            users.Clear();            
+            IEnumerable<UserModel> list = await DataService.getProfiles();
+            list.ToList().ForEach(fn => {
+                users.Add(fn);
 
-            int userId;
-            bool Success = int.TryParse(tempUserId, out userId);
-            if (Success)
-            {
-                user = new UserModel
-                {
-                    name = userName,
-                    email = userEmail,
-                    pPic = userImage,
-                    id = userId,                    
-                };
-                OnPropertyChanged(nameof(user));
-            }      
-            
+            });
         }
+
+        
         public async Task getAllUploads()
         {
             userImages.Clear();
-            int userId = Int32.Parse(await SecureStorage.GetAsync("userId"));
+            int userId;
+            string userIdString = await SecureStorage.GetAsync("userId");
+            userId = string.IsNullOrEmpty(userIdString) ? 0 : Int32.Parse(userIdString);
             IEnumerable<string> list = await DataService.getUploads();
             list.ToList().ForEach(fn => {
                 if (fn.Split('_')[0] == userId.ToString())

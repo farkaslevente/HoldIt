@@ -69,7 +69,7 @@ const userController = {
           `SELECT * FROM users WHERE id = ${id}`
         )) || [];
       user = rows[0];
-      const newFollowed = user.followed + " " + userId + " +";
+      const newFollowed = user.followed + userId + " +";
 
       await query(`
             UPDATE users SET name= '${user.name}', email= '${user.email}', pPic= '${user.pPic}', pwd= '${user.pwd}',
@@ -90,7 +90,7 @@ const userController = {
           `SELECT * FROM users WHERE id = ${id}`
         )) || [];
       user = rows[0];
-      const newFollowed = (user.followed + "").replace(" " + userId + " +", "");
+      const newFollowed = (user.followed + "").replace(userId + " +", "");
 
       await query(`
             UPDATE users SET name= '${user.name}', email= '${user.email}', pPic= '${user.pPic}', pwd= '${user.pwd}',

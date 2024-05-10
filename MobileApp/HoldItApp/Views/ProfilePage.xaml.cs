@@ -13,7 +13,7 @@ public partial class ProfilePage : ContentPage
     {
         fromPP();
         InitializeComponent();
-        this.BindingContext = new ProfilePageViewModel();
+        this.BindingContext = new ProfilePageViewModel();        
     }
 
     private async Task fromPP()

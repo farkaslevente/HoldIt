@@ -6,13 +6,16 @@ namespace HoldItApp.Views;
 
 public partial class HomePage : ContentPage
 {
-    public ShowCasePageViewModel SCPVM { get; set; }
+    public ProfilePageViewModel PPVM { get; set; }
 
     public HomePage()
 	{
-        SCPVM = new ShowCasePageViewModel();
+        PPVM = new ProfilePageViewModel();
 		InitializeComponent();
-        this.BindingContext = SCPVM;
+        this.BindingContext = PPVM;
+        //searchBTN.IsEnabled = true;
+        finalSearchBTN.IsEnabled = true;
+        finalSearchBTN.Command = PPVM.SearchCommand;
 
     }
     private void cameraView_CamerasLoaded(object sender, EventArgs e)
@@ -26,8 +29,7 @@ public partial class HomePage : ContentPage
     }
 
     private async void TakePicture_Clicked(object sender, EventArgs e)
-    {
-        SCPVM.source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+    {        
         testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
         await BRDShowcase.TranslateTo(0, -800, 300);
 
@@ -97,6 +99,21 @@ public partial class HomePage : ContentPage
 
     private async void searchBTN_Clicked(object sender, EventArgs e)
     {
-        await BRDShowcase.TranslateTo(0, 100, 300);
+        await SearchGrid.TranslateTo(0, 100, 300);
+       
+        //searchBTN.IsEnabled = false;
+        //searchBTN.IsVisible = false;
+        
+        finalSearchBTN.IsEnabled = true;
+        finalSearchBTN.IsVisible = true;
+    }
+
+    private void finalSearchBTN_Clicked(object sender, EventArgs e)
+    {
+        //searchBTN.IsEnabled = true;
+        //searchBTN.IsVisible = true;
+        
+        finalSearchBTN.IsEnabled = false;
+        finalSearchBTN.IsVisible = false;
     }
 }

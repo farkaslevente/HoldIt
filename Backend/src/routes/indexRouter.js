@@ -58,9 +58,7 @@ router.get("/pictures", [verifyToken], async function (_req, res, next) {
 //            ▀▀▀  ▀▀▀▀  ▀▀▀ .▀  ▀ ▀▀▀▀
 
 router.get(
-  "/users",
-  [verifyToken],
-  [isAdmin],
+  "/users",  
   async function (_req, res, next) {
     try {
       res.json(await dbFunctions.getUsers());

@@ -13,7 +13,14 @@
                             MinimumWidthRequest="100"
                             MaximumHeightRequest="100"
                             MaximumWidthRequest="100"/>
-        <Label Text="{Binding ownerName}" Grid.Row="0" Grid.Column="1" TextColor="Black" VerticalOptions="Start" Margin="0" MinimumHeightRequest="30" FontSize="20"/>
+
+        <Grid Grid.Row="0" Grid.Column="1" VerticalOptions="Start" Margin="0" RowDefinitions="*,2*" ColumnDefinitions="*,*">
+            <VerticalStackLayout>
+                <Label Text="{Binding ownerName}" TextColor="Black" MinimumHeightRequest="30" FontSize="20" Grid.Row="0" Grid.ColumnSpan="2"/>
+            </VerticalStackLayout>
+            <Button Text="FOLLOW" FontAttributes="Bold,Italic" BackgroundColor="Green" FontSize="10" Command="{Binding followCommand}" Grid.Row="1" Grid.Column="0" Margin="10"/>
+            <Button Text="UNFOLLOW" FontAttributes="Bold,Italic" BackgroundColor="Red" FontSize="10" Command="{Binding unFollowCommand}" Grid.Row="1" Grid.Column="1" Margin="10"/>
+        </Grid>
 
         <Grid ColumnDefinitions="4*,2*" Grid.Row="2" Grid.ColumnSpan="2">
         <Border Grid.Column="0" Margin="10" StrokeShape="RoundRectangle 10" VerticalOptions="CenterAndExpand">

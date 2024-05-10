@@ -26,7 +26,7 @@ namespace HoldItApp.ViewModels
             first = true;
             posts = new ObservableCollection<PostModel>();
             getAllPosts();
-            infoCommand = new Command(async () =>
+            infoCommand = new Command(() =>
             {
                 if (selectedPost == null) return;
                 Shell.Current.ShowPopup(new PopUpDetailsPage(selectedPost));

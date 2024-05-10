@@ -5,8 +5,7 @@ using HoldItApp.Views;
 namespace HoldItApp.Views;
 
 public partial class PPCatalogPage : ContentPage
-{
-    ProfilePage profilePage;
+{    
     public static string source;
     public PPCatalogPage()
 		{				

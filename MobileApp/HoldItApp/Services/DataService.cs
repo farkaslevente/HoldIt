@@ -137,7 +137,20 @@ namespace HoldItApp.Services
 
             }
         }
+        public static async Task<IEnumerable<UserModel>> getProfiles()
+        {
+            using (var client = new HttpClient())
+            {
+                string token = await SecureStorage.GetAsync("userToken");
+                client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+                client.BaseAddress = new Uri(url);
+                var uri = $"/users";
+                var result = await client.GetStringAsync(uri);
 
+                return JsonConvert.DeserializeObject<List<UserModel>>(result);
+            }
+        }
         public static async Task<UserModel> getProfileById(int userId)
         {
             using (var client = new HttpClient())
@@ -228,6 +241,30 @@ namespace HoldItApp.Services
             client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.PostAsync(url + "/users/addfollow", content);
+            string result = await response.Content.ReadAsStringAsync();
+
+            if ((int)response.StatusCode == 401)
+            {
+                return "error";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static async Task<string> removeProfileFollow(int userId)
+        {
+            string jsonData = JsonConvert.SerializeObject(new
+            {
+                userId = userId,
+            });
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            string token = await SecureStorage.GetAsync("userToken");
+            client.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await client.PostAsync(url + "/users/removefollow", content);
             string result = await response.Content.ReadAsStringAsync();
 
             if ((int)response.StatusCode == 401)

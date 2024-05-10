@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
+             xmlns:vm="clr-namespace:HoldItApp.ViewModels"
              x:Class="HoldItApp.Views.FollowedPage"
-             Title="FollowedPage">
+             Title=""
+             Shell.NavBarIsVisible="False">
+    <ContentPage.BindingContext>
+        <vm:FollowedPageViewModel/>
+    </ContentPage.BindingContext>
     <Grid>
-        <CollectionView></CollectionView>
+        <CollectionView ItemsSource="{Binding followedUsers}"
+                        SelectedItem="{Binding followedUser}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding userSelectionCommand}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Grid ColumnDefinitions="*,4*" RowDefinitions="65" Margin="10" ColumnSpacing="10">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal" />
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border Grid.Column="0" StrokeShape="RoundRectangle 70" Grid.Row="0">
+                                <svg:SvgCachedImage Source="{Binding pPic}"/>
+                            </Border>
+                            <Label Text="{Binding name}" FontSize="20" FontAttributes="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>
