@@ -53,7 +53,7 @@ namespace HoldItApp.ViewModels
                 resultPosts.Clear();
                 foreach (var user in users)
                 {
-                    if (user.name.Contains(searchParam))
+                    if (user.name.ToLower().Contains(searchParam.ToLower()))
                     {
                         resultUsers.Add(user);
                     }
@@ -61,16 +61,45 @@ namespace HoldItApp.ViewModels
 
                 foreach (var post in posts)
                 {
-                    if (post.comment.Contains(searchParam))
+                    if (post.comment.ToLower().Contains(searchParam.ToLower()))
                     {
                         resultPosts.Add(post);
                     }
-                }               
-                await Shell.Current.GoToAsync(nameof(SearchResultPage),
-                    new Dictionary<string, object> { 
-                        { "resultsUsers",  resultUsers},
-                        { "resultPosts", resultPosts} 
-                    });
+                }
+                if (!resultUsers.IsNullOrEmpty())
+                {
+                    if (!resultPosts.IsNullOrEmpty())
+                    {
+                        await Shell.Current.GoToAsync(nameof(SearchResultPage),
+                                new Dictionary<string, object> {
+                                    { "resultsUsers",  resultUsers},
+                                    { "resultPosts", resultPosts}
+                                    });
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync(nameof(SearchResultPage),
+                                new Dictionary<string, object> {
+                                    { "resultsUsers",  resultUsers},                        
+                                    });
+                    }
+                }
+                else if (!resultPosts.IsNullOrEmpty())
+                {
+                    await Shell.Current.GoToAsync(nameof(SearchResultPage),
+                                new Dictionary<string, object> {
+                                    { "resultPosts",  resultPosts},
+                                    });
+                }
+                else
+                {
+                    ObservableCollection<UserModel> emptyResult = new ObservableCollection<UserModel>();
+                    await Shell.Current.GoToAsync(nameof(SearchResultPage),
+                                new Dictionary<string, object> {
+                                    { "emptyResult",  emptyResult},
+                                    });
+                }
+                
             });
             postDetailCommand = new Command( async() =>
             {

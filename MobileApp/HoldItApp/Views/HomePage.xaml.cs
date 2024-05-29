@@ -12,8 +12,7 @@ public partial class HomePage : ContentPage
 	{
         PPVM = new ProfilePageViewModel();
 		InitializeComponent();
-        this.BindingContext = PPVM;
-        //searchBTN.IsEnabled = true;
+        this.BindingContext = PPVM;        
         finalSearchBTN.IsEnabled = true;
         finalSearchBTN.Command = PPVM.SearchCommand;
 
@@ -95,25 +94,5 @@ public partial class HomePage : ContentPage
     private async void PageTesterBTN_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(PageTester));
-    }
-
-    private async void searchBTN_Clicked(object sender, EventArgs e)
-    {
-        await SearchGrid.TranslateTo(0, 100, 300);
-       
-        //searchBTN.IsEnabled = false;
-        //searchBTN.IsVisible = false;
-        
-        finalSearchBTN.IsEnabled = true;
-        finalSearchBTN.IsVisible = true;
-    }
-
-    private void finalSearchBTN_Clicked(object sender, EventArgs e)
-    {
-        //searchBTN.IsEnabled = true;
-        //searchBTN.IsVisible = true;
-        
-        finalSearchBTN.IsEnabled = false;
-        finalSearchBTN.IsVisible = false;
     }
 }

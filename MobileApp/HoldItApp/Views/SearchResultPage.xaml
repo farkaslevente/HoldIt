@@ -5,32 +5,37 @@
              x:Class="HoldItApp.Views.SearchResultPage"
              Title="SearchResultPage">
     <ScrollView>
-        <Grid RowDefinitions="auto,auto">
+        <Grid RowDefinitions="auto,auto" ColumnDefinitions="*">
+            <Grid RowDefinitions="auto,auto" Margin="10">
+                <Label Text="Found Users" Grid.Row="0" FontAttributes="Bold"/>
+                <CollectionView Grid.Row="1"
+                ItemsSource="{Binding userResults}"
+                SelectionMode="Single"
+                SelectionChangedCommand="{Binding userSelectionCommand}"
+                SelectedItem="{Binding selectedUser}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <HorizontalStackLayout Margin="20" Spacing="10">
+                                    <svg:SvgCachedImage Source="{Binding pPic}" HeightRequest="40" WidthRequest="40"/>
+                                    <Label Text="{Binding name}" FontSize="20" FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
             <!--User Results-->
-            <CollectionView Grid.Row="0"
-                            ItemsSource="{Binding userResults}"
-                            SelectionMode="Single"
-                            SelectionChangedCommand="{Binding userSelectionCommand}"
-                            SelectedItem="{Binding selectedUser}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="*,4*">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal" />
-                                    <VisualState Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="Transparent" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <svg:SvgCachedImage Source="{Binding pPic}" Grid.Column="0"/>
-                            <Label Text="{Binding name}" FontSize="20" FontAttributes="Bold" Grid.Row="1"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
             
             <!--Post Results-->
             <CollectionView Grid.Row="1"

@@ -24,15 +24,14 @@
               Padding="10" 
               MaximumHeightRequest="50" 
               VerticalOptions="Start">
-            <!--<ImageButton x:Name="searchBTN" Grid.Column="2" Source="search.svg"  Margin="0,0,0,0" Clicked="searchBTN_Clicked" MaximumHeightRequest="40"/>-->
-            <ImageButton x:Name="finalSearchBTN" Grid.Column="2" Source="search.svg" MaximumHeightRequest="40" Clicked="finalSearchBTN_Clicked" Margin="0,60,0,-60"/>
+            <ImageButton x:Name="finalSearchBTN" Grid.Column="2" Source="search.svg" MaximumHeightRequest="40"  Margin="0,0,0,0"/>
             <ImageButton x:Name="torchBTN" Grid.Column="0" Source="torchdeactivated.svg"  Margin="0,0,0,0" Clicked="torchBTN_Clicked" Rotation="90" MaximumHeightRequest="40"/>
             <Grid Grid.Column="1" x:Name="SearchGrid" 
                   VerticalOptions="Start">
                   <!--Margin="0,-100,0,100"--> 
                   
                 <Border  StrokeShape="RoundRectangle 10" Padding="0" Margin="0,0,0,-8">
-                    <Entry Text="{Binding searchParam}" Placeholder="Example Elek" BackgroundColor="Black" HorizontalTextAlignment="Center"/>
+                    <Entry Text="{Binding searchParam}" Placeholder="Example Elek" BackgroundColor="Black" HorizontalTextAlignment="Center" TextColor="White"/>
                 </Border>
             </Grid>
         </Grid>
