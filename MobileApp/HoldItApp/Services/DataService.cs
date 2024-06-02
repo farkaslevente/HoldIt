@@ -14,6 +14,8 @@ using System.Net.Http.Headers;
 using FFImageLoading.Args;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
+using Camera.MAUI;
+using Microsoft.Maui.Controls;
 
 
 
@@ -590,6 +592,58 @@ namespace HoldItApp.Services
                 PopUpViewModel.imageData = imageData;
             }
             return uploadFile.FileName;
+        }
+
+        public static async Task<string> CaptureAndUploadImageAsync(int userId, int imgId, CameraView cameraView)
+        {
+            // Capture the photo from the camera view
+            var photoResult = await cameraView.TakePhotoAsync();
+            if (photoResult == null) return "error";
+
+            // Create a MemoryStream and copy the photo result stream into it
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                await photoResult.CopyToAsync(memoryStream);
+                memoryStream.Position = 0;
+
+                // Create a new post and delete the dummy one
+                string dummyJsonData = JsonConvert.SerializeObject(new
+                {
+                    imgUrl = "",
+                    comment = "",
+                    ownerId = userId
+                });
+                StringContent dummyContent = new StringContent(dummyJsonData, Encoding.UTF8, "application/json");
+                HttpClient dummyClient = new HttpClient();
+                string dummyToken = await SecureStorage.GetAsync("userToken");
+                dummyClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", dummyToken);
+                HttpResponseMessage dummyResponse = await dummyClient.PostAsync(url + "/posts", dummyContent);
+                string dummyResult = await dummyResponse.Content.ReadAsStringAsync();
+                await getAllPosts();
+                int postId = 0;
+                for (int i = 0; i < posts.Count(); i++)
+                {
+                    if (postId < posts[i].id)
+                    {
+                        postId = posts[i].id;
+                    }
+                }
+                await deletePost(postId);
+                postId++;
+                var httpContent = new MultipartFormDataContent();
+                string fileName = $"{userId}_{postId}_{imgId}.jpg";
+                httpContent.Add(new StreamContent(memoryStream), "file", fileName);
+                
+                var httpClient = new HttpClient();
+                string token = await SecureStorage.GetAsync("userToken");
+                httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+                var result = await httpClient.PostAsync($"{url}/uploads/upload", httpContent);
+                var response = await result.Content.ReadAsStringAsync();                
+                await SecureStorage.SetAsync("imgId", imgId.ToString());
+                return fileName;
+            }
         }
         public class TokenResponse
         {

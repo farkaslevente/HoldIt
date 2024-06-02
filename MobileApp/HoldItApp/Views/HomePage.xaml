@@ -28,14 +28,13 @@
             <ImageButton x:Name="torchBTN" Grid.Column="0" Source="torchdeactivated.svg"  Margin="0,0,0,0" Clicked="torchBTN_Clicked" Rotation="90" MaximumHeightRequest="40"/>
             <Grid Grid.Column="1" x:Name="SearchGrid" 
                   VerticalOptions="Start">
-                  <!--Margin="0,-100,0,100"--> 
-                  
                 <Border  StrokeShape="RoundRectangle 10" Padding="0" Margin="0,0,0,-8">
                     <Entry Text="{Binding searchParam}" Placeholder="Example Elek" BackgroundColor="Black" HorizontalTextAlignment="Center" TextColor="White"/>
                 </Border>
             </Grid>
         </Grid>
         <cam:CameraView x:Name="cameraView" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="5" HorizontalOptions="FillAndExpand" CamerasLoaded="cameraView_CamerasLoaded" ZIndex="0"/>
+        
         <!--Menu options-->
         <Grid Grid.Row="2" Grid.ColumnSpan="5" ColumnDefinitions="*,*,1.2*,*,*" RowDefinitions="0.4*,*" Padding="0,0,0,0">
             <Border Grid.ColumnSpan="5" Grid.Row="1" StrokeShape="RoundRectangle 50" StrokeThickness="0" Padding="10" BackgroundColor="Black" Margin="10,0,10,0">
