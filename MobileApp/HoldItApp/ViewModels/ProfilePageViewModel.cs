@@ -35,6 +35,17 @@ namespace HoldItApp.ViewModels
             }
         }
 
+        private string _comment;
+        public string comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand SearchCommand { get; set; }
         public ProfilePageViewModel()
         {

@@ -10,9 +10,20 @@
 
     <Grid RowDefinitions="0.18*,*,0.18*,0.05*" ColumnDefinitions="*,*,*,*,*">
         <Border x:Name="BRDShowcase"   Grid.Row="1" Grid.ColumnSpan="5" BackgroundColor="White" StrokeShape="RoundRectangle 20" Margin="30,800,30, -800" ZIndex="1">
-            <Grid RowDefinitions="0.1*,3*,0.1*,0.8*" ColumnDefinitions="*,3*,*">
-                <Image x:Name="testIMG" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" MinimumHeightRequest="400" Grid.Column="1"/>
-                <Button x:Name="saveImageBTN" Text="Save image" Grid.Row="3" Margin="20" Grid.Column="1" Clicked="saveImageBTN_Clicked" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+            <Grid RowDefinitions="0.1*,3*,0.5*,0.8*" ColumnDefinitions="*,3*,*">
+                <Image x:Name="previewIMG" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" MinimumHeightRequest="400" Grid.Column="1"/>
+                <Border  StrokeShape="RoundRectangle 10" Grid.Column="1" Grid.Row="2" Padding="6">
+                    <Entry Text="{Binding comment}" Placeholder="your comment" BackgroundColor="White" HorizontalTextAlignment="Center" TextColor="Black"/>
+                </Border>
+                <StackLayout Orientation="Horizontal"
+                             Grid.Row="3" 
+                             Margin="20"                             
+                             Grid.ColumnSpan="3"
+                             Spacing="10">
+                    <Button x:Name="saveImageBTN" Text="Upload Post"  Clicked="saveImageBTN_Clicked" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+                    <Button x:Name="dismissBTN" Text="Dismiss"  Clicked="dismissBTN_Clicked" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+                </StackLayout>
+                
             </Grid>
         </Border>
         <Grid Grid.Row="0" 

@@ -455,7 +455,7 @@ namespace HoldItApp.Services
                 client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
                 client.BaseAddress = new Uri(url);
-                var uri = $"/ads/{postId}";
+                var uri = $"/uploads/{postId}";
                 HttpResponseMessage response = await client.DeleteAsync(uri);
 
                 return;
@@ -535,8 +535,7 @@ namespace HoldItApp.Services
             IEnumerable<PostModel> list = await getPosts();
             list.ToList().ForEach(p => posts.Add(p));
         }
-
-        //dolog van vele
+        
         public static async Task<string> imageUpload(int userId, int imgId) 
         {
             
@@ -594,19 +593,14 @@ namespace HoldItApp.Services
             return uploadFile.FileName;
         }
 
-        public static async Task<string> CaptureAndUploadImageAsync(int userId, int imgId, CameraView cameraView)
-        {
-            // Capture the photo from the camera view
-            var photoResult = await cameraView.TakePhotoAsync();
-            if (photoResult == null) return "error";
-
-            // Create a MemoryStream and copy the photo result stream into it
+        public static async Task<string> CaptureAndUploadImageAsync(int userId, int imgId, Stream cameraView)
+        {            
+            var photoResult = cameraView;
+            if (photoResult == null) return "error";         
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 await photoResult.CopyToAsync(memoryStream);
                 memoryStream.Position = 0;
-
-                // Create a new post and delete the dummy one
                 string dummyJsonData = JsonConvert.SerializeObject(new
                 {
                     imgUrl = "",
@@ -618,7 +612,7 @@ namespace HoldItApp.Services
                 string dummyToken = await SecureStorage.GetAsync("userToken");
                 dummyClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", dummyToken);
-                HttpResponseMessage dummyResponse = await dummyClient.PostAsync(url + "/posts", dummyContent);
+                HttpResponseMessage dummyResponse = await dummyClient.PostAsync(url + "/uploads/post", dummyContent);
                 string dummyResult = await dummyResponse.Content.ReadAsStringAsync();
                 await getAllPosts();
                 int postId = 0;
@@ -633,8 +627,7 @@ namespace HoldItApp.Services
                 postId++;
                 var httpContent = new MultipartFormDataContent();
                 string fileName = $"{userId}_{postId}_{imgId}.jpg";
-                httpContent.Add(new StreamContent(memoryStream), "file", fileName);
-                
+                httpContent.Add(new StreamContent(memoryStream), "file", fileName);                
                 var httpClient = new HttpClient();
                 string token = await SecureStorage.GetAsync("userToken");
                 httpClient.DefaultRequestHeaders.Authorization =

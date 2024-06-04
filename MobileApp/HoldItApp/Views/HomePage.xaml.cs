@@ -9,12 +9,11 @@ namespace HoldItApp.Views;
 public partial class HomePage : ContentPage
 {
     public ProfilePageViewModel PPVM { get; set; }
-    public CameraView cv { get; set; }
+    public Stream cv;
 
     public HomePage()
 	{
-        PPVM = new ProfilePageViewModel();
-        cv = new CameraView();
+        PPVM = new ProfilePageViewModel();        
 		InitializeComponent();
         this.BindingContext = PPVM;        
         finalSearchBTN.IsEnabled = true;
@@ -32,13 +31,31 @@ public partial class HomePage : ContentPage
     }
 
     private async void TakePicture_Clicked(object sender, EventArgs e)
-    {
-        cv = cameraView;
-        testIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+    {        
+        cv = await cameraView.TakePhotoAsync();
+
+        previewIMG.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
         await BRDShowcase.TranslateTo(0, -800, 300);
 
     }
-
+    private async void saveImageBTN_Clicked(object sender, EventArgs e)
+    {        
+        await BRDShowcase.TranslateTo(0, 800, 300);
+        string uId = await SecureStorage.GetAsync("userId");
+        if (uId.IsNullOrEmpty())
+        {
+            await DisplayAlert("Please log in", "To post your moments please log into our system", "Back");
+        }
+        else
+        {            
+            string fileName = await DataService.CaptureAndUploadImageAsync(Convert.ToInt32(uId), 0, cv);
+            string result = await DataService.newPostUpload($"http://192.168.0.165:9000/uploads/{fileName}", PPVM.comment, Convert.ToInt32(fileName.Split("_")[0]));
+            if (result == "error") {
+                await DisplayAlert("Something went wrong...", "An error occured while we uploaded your post, please try again later.", "Back");
+            }
+            PPVM.comment = "";
+        }
+    }
     private void torchBTN_Clicked(object sender, EventArgs e)
     {
         cameraView.TorchEnabled = !cameraView.TorchEnabled;
@@ -51,24 +68,7 @@ public partial class HomePage : ContentPage
         
     }
 
-    private async void saveImageBTN_Clicked(object sender, EventArgs e)
-    {
-        //tobe done tomorrow
-        await BRDShowcase.TranslateTo(0, 800, 300);
-        string uId = await SecureStorage.GetAsync("userId");
-        if (uId.IsNullOrEmpty())
-        {
-            await DisplayAlert("Please log in", "To post your moments please log into our system", "Back");
-        }
-        else
-        {
-            ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
-            await DataService.CaptureAndUploadImageAsync(Convert.ToInt32(uId), 0, cv);
-            activityIndicator = new ActivityIndicator { IsRunning = false };
-        }
-        
-             
-    }
+   
 
     private async void profileBTN_Clicked(object sender, EventArgs e)
     {
@@ -105,7 +105,16 @@ public partial class HomePage : ContentPage
 
     private async void settingsBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(SettingsPage));
+        string uName = await SecureStorage.GetAsync("userName");
+        if (uName.IsNullOrEmpty())
+        {
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
+        }
+        else
+        {
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
+        }
+        
     }
 
     private async void PageTesterBTN_Clicked(object sender, EventArgs e)
@@ -113,5 +122,8 @@ public partial class HomePage : ContentPage
         await Shell.Current.GoToAsync(nameof(PageTester));
     }
 
-
+    private async void dismissBTN_Clicked(object sender, EventArgs e)
+    {
+        await BRDShowcase.TranslateTo(0, 800, 300);
+    }
 }
