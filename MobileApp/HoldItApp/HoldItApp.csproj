@@ -79,6 +79,9 @@
 		<MauiImage Update="Resources\Images\darksupport.svg">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</MauiImage>
+		<MauiImage Update="Resources\Images\supportwhite.svg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiImage>
 		<MauiImage Update="Resources\Images\support.svg">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</MauiImage>
@@ -110,6 +113,7 @@
 	  <None Remove="Resources\Images\darksupport.svg" />
 	  <None Remove="Resources\Images\darktimeline.svg" />
 	  <None Remove="Resources\Images\support.svg" />
+	  <None Remove="Resources\Images\supportwhite.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

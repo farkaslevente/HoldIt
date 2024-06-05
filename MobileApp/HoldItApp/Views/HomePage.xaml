@@ -53,7 +53,7 @@
                     <ImageButton x:Name="profileBTN" Source="profile.svg"   Clicked="profileBTN_Clicked"  Grid.Column="0" Grid.Row="1" Padding="3"/>
                     <ImageButton x:Name="followedBTN" Source="messages.svg" Clicked="followedBTN_Clicked" Grid.Column="1" Grid.Row="1" Padding="3"/>
                     <ImageButton x:Name="timelineBTN" Source="timeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1" Padding="3"/>
-                    <ImageButton x:Name="settingsBTN" Source="support.svg" Clicked="settingsBTN_Clicked" Grid.Column="4" Grid.Row="1" Padding="5"/>
+                    <ImageButton x:Name="settingsBTN" Source="supportwhite.svg" Clicked="settingsBTN_Clicked" Grid.Column="4" Grid.Row="1" Padding="5"/>
                 </Grid>
             </Border>
             <Border Grid.Column="2" Grid.RowSpan="2" StrokeShape="RoundRectangle 50" StrokeThickness="3" Padding="10" BackgroundColor="Black" Margin="0,10,0,10">
