@@ -62,7 +62,7 @@ const postController = {
       if (ad === undefined) {
         return res.status(404).json({ message: "Ad not found" });
       }
-      if (ad.tulajId == userId) {
+      if (ad.ownerId == userId) {
         await query(`
                 DELETE FROM uploads WHERE id = ${id}`);
         return res

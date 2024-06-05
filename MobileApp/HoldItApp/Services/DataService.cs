@@ -32,8 +32,7 @@ namespace HoldItApp.Services
 //   / // / / / / / / / / /
 //  / // /_/ / /_/ / /_/ / 
 // /_/ \____/_____/\____/  
-// temporary upload that can give imgUrl back if user wants to really upload the picture
-// a delete function for said temp. upload
+// create private messaging in DB, here and on the backend
 // 
 
         // _    _                                     _               

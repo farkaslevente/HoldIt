@@ -54,7 +54,9 @@ namespace HoldItApp.ViewModels
 
             foreach (var fn in list)
             {
-                if (userId.IsNullOrEmpty())
+                if (fn.isPrivate == 0)
+                { 
+                    if (userId.IsNullOrEmpty())
                 {
                     userId = "0";
                 }
@@ -82,7 +84,8 @@ namespace HoldItApp.ViewModels
 
 
                     postsToAdd.Add(fn);
-                }               
+                }
+                }
             }        
 
             foreach (var post in postsToAdd)
@@ -102,6 +105,7 @@ namespace HoldItApp.ViewModels
             IEnumerable<PostModel> list = await DataService.getPosts();
             list.ToList().ForEach(async fn =>
             {
+                if (fn.isPrivate == 0) { 
                 UserModel owner = await DataService.getProfileById(fn.ownerId);
                 fn.ownerPic = owner.pPic;
                 fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;
@@ -128,6 +132,7 @@ namespace HoldItApp.ViewModels
                 }
 
                 posts.Add(fn);
+                }
             });
             InitializeTimer();
         }

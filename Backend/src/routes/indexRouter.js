@@ -250,6 +250,8 @@ router.put("/uploads/:id", [verifyToken], async function (req, res) {
 
 router.delete("/uploads/:id", [verifyToken], async function (req, res) {
   try {
+    console.log(req.user.id)
+    console.log(req.params.id)
     res.json(
       await postController.deleteUpload(req, res, req.user.id, req.params.id)
     );

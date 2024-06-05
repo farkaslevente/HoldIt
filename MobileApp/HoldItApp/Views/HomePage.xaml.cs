@@ -112,7 +112,7 @@ public partial class HomePage : ContentPage
         }
         else
         {
-            await Shell.Current.GoToAsync(nameof(SettingsPage));
+            await Shell.Current.GoToAsync(nameof(SupportPage));
         }
         
     }
