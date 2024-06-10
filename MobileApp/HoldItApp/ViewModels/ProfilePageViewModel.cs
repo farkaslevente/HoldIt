@@ -18,7 +18,16 @@ namespace HoldItApp.ViewModels
         public ICommand postDetailCommand { get; set; }
         public ObservableCollection<UserModel> users { get; set; }
         public ObservableCollection<PostModel> posts { get; set; }
-        public UserModel user { get; set; }
+        private UserModel _user;
+        public UserModel user
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<string> userImages { get; set; }
         public ObservableCollection<UserModel> resultUsers { get; set; }
         public ObservableCollection<PostModel> resultPosts { get; set; }
@@ -34,14 +43,13 @@ namespace HoldItApp.ViewModels
                 OnPropertyChanged();
             }
         }
-
         private string _comment;
         public string comment
         {
             get => _comment;
             set
             {
-                _comment = value;
+                _comment = value;              
                 OnPropertyChanged();
             }
         }
@@ -133,15 +141,16 @@ namespace HoldItApp.ViewModels
 
         private async Task getAllPosts()
         {
-            string userId = await SecureStorage.GetAsync("userId");                       
+            string userId = await SecureStorage.GetAsync("userId");
+            user = await DataService.getProfileById(Convert.ToInt32(userId));
             IEnumerable<PostModel> list = await DataService.getPosts();
             foreach (var fn in list)
             {
                 if (fn.ownerId == Int32.Parse(userId))
-                {
-                    UserModel owner = await DataService.getProfileById(fn.ownerId);
-                    fn.ownerPic = owner.pPic;
-                    fn.ownerName = owner.name;                    
+                {                    
+                    fn.ownerPic = user.pPic;
+                    fn.ownerName = user.name;
+                    
                     posts.Add(fn);
                 }               
             }
@@ -168,7 +177,8 @@ namespace HoldItApp.ViewModels
         {
             userImages.Clear();
             int userId;
-            string userIdString = await SecureStorage.GetAsync("userId");
+            string userIdString = await SecureStorage.GetAsync("userId");            
+            user = await DataService.getProfileById(Convert.ToInt32(userIdString));
             userId = string.IsNullOrEmpty(userIdString) ? 0 : Int32.Parse(userIdString);
             IEnumerable<string> list = await DataService.getUploads();
             list.ToList().ForEach(fn => {

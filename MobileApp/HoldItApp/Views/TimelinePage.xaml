@@ -42,8 +42,23 @@
                                         <Border Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
                                             <VerticalStackLayout>
                                                 <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
-
-                                                <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10" />
+                                                <Label x:Name="LBComment" Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10">
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding comment}" Value="">
+                                                            <Setter Property="IsVisible" Value="False" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                                <!--<Label x:Name="LBComment" Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10" >
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding comment}" Value="{x:Static sys:String.Empty}">
+                                                            <Setter Property="IsVisible" Value="False" />
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding comment}">
+                                                            <Setter Property="IsVisible" Value="True" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>-->
                                             </VerticalStackLayout>
                                         </Border>
                                         <Label Text="{Binding ownerName}" FontSize="12" TextColor="Black"/>

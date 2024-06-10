@@ -49,7 +49,7 @@ public partial class HomePage : ContentPage
         else
         {            
             string fileName = await DataService.CaptureAndUploadImageAsync(Convert.ToInt32(uId), 0, cv);
-            string result = await DataService.newPostUpload($"http://192.168.0.165:9000/uploads/{fileName}", PPVM.comment, Convert.ToInt32(fileName.Split("_")[0]));
+            string result = await DataService.newPostUpload($"http://192.168.0.165:9000/uploads/{fileName}", PPVM.comment, Convert.ToInt32(fileName.Split("_")[0]),0,0);
             if (result == "error") {
                 await DisplayAlert("Something went wrong...", "An error occured while we uploaded your post, please try again later.", "Back");
             }
@@ -108,18 +108,14 @@ public partial class HomePage : ContentPage
         string uName = await SecureStorage.GetAsync("userName");
         if (uName.IsNullOrEmpty())
         {
-            await Shell.Current.GoToAsync(nameof(SettingsPage));
+            //Incognito support page as soon as the user manual is completed
+            await Shell.Current.GoToAsync(nameof(SupportPage));
         }
         else
         {
             await Shell.Current.GoToAsync(nameof(SupportPage));
         }
         
-    }
-
-    private async void PageTesterBTN_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(PageTester));
     }
 
     private async void dismissBTN_Clicked(object sender, EventArgs e)

@@ -75,6 +75,8 @@ namespace HoldItApp.ViewModels
             uploadCommand = new Command(async () =>
             {
                 int userId = Int32.Parse(await SecureStorage.GetAsync("userId"));
+                int targetId = 0;
+                int isPrivate = 0;
                 if (UploadedImgUrl.IsNullOrEmpty())
                 {
                     UploadedImgUrl = "onebyone.png";
@@ -82,7 +84,9 @@ namespace HoldItApp.ViewModels
                 await DataService.newPostUpload(
                                                    UploadedImgUrl,
                                                    comment,
-                                                   userId
+                                                   userId,
+                                                   isPrivate,
+                                                   targetId
                                                    );                
                 if (await SecureStorage.GetAsync("uploaded") == true.ToString())
                 {

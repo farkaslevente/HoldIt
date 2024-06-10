@@ -17,6 +17,7 @@ namespace HoldItApp.ViewModels
     public class TimelinePageViewModel: BindableObject
     {
         public ObservableCollection<PostModel> posts { get; set; }
+        public ObservableCollection<UserModel> users { get; set; }
         public PostModel selectedPost { get; set; }
         public ICommand infoCommand { get; set; }
         public bool first { get; set; }
@@ -25,7 +26,8 @@ namespace HoldItApp.ViewModels
         {
             first = true;
             posts = new ObservableCollection<PostModel>();
-            getAllPosts();
+            users = new ObservableCollection<UserModel>();
+            getAllPosts();            
             infoCommand = new Command(() =>
             {
                 if (selectedPost == null) return;
@@ -37,6 +39,16 @@ namespace HoldItApp.ViewModels
             
             
         }
+
+        private async Task getUsers()
+        {
+            users.Clear();
+            IEnumerable<UserModel> list = await DataService.getProfiles();
+            list.ToList().ForEach(fn => {
+                users.Add(fn);
+            });
+        }
+
         private void InitializeTimer()
         {            
             _refreshTimer = new System.Timers.Timer();
@@ -62,12 +74,12 @@ namespace HoldItApp.ViewModels
                 }
                 if (!posts.Any(item => item.id == fn.id))
                 {
-                    UserModel owner = await DataService.getProfileById(fn.ownerId);
-                    fn.ownerPic = owner.pPic;
+                        //UserModel owner = await DataService.getProfileById(fn.ownerId);
+                        UserModel owner = users.Where(x => x.id == fn.ownerId).First();
+                        fn.ownerPic = owner.pPic;
 
                     string[] butcheredDate = fn.time.Split(" ");
-                    fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";
-
+                    fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";                   
                    
                     fn.gridColumn = fn.ownerId == Int32.Parse(userId) ? 1 : 0;
                     fn.messageColor = fn.ownerId == Int32.Parse(userId) ? Colors.Blue : Colors.Black;
@@ -94,8 +106,9 @@ namespace HoldItApp.ViewModels
             }          
         }
 
-        private async void getAllPosts()
+        private async Task getAllPosts()
         {
+            await getUsers();
             string userId = await SecureStorage.GetAsync("userId");
             if (userId.IsNullOrEmpty())
             {
@@ -105,9 +118,9 @@ namespace HoldItApp.ViewModels
             IEnumerable<PostModel> list = await DataService.getPosts();
             list.ToList().ForEach(async fn =>
             {
-                if (fn.isPrivate == 0) { 
-                UserModel owner = await DataService.getProfileById(fn.ownerId);
-                fn.ownerPic = owner.pPic;
+                if (fn.isPrivate == 0) {
+                    UserModel owner = users.Where(x => x.id == fn.ownerId).First();
+                    fn.ownerPic = owner.pPic;
                 fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;
                 fn.ownerName = owner.name;
                 fn.ownerNamePos = fn.ownerId == Int32.Parse(userId) ? "End" : "Start";

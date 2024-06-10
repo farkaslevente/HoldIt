@@ -15,10 +15,10 @@ const postController = {
 
   postUpload: async function (req, res, id) {
     try {
-      const { imgUrl, comment, ownerId } = req.body;
+      const { imgUrl, comment, ownerId,isPrivate, targetId } = req.body;
       const d = new Date();
-      await query(`INSERT INTO uploads (id, imgUrl, time, comment, ownerId) VALUES 
-            (null, '${imgUrl}', '${d}', '${comment}','${ownerId}')`);
+      await query(`INSERT INTO uploads (id, imgUrl, time, comment, ownerId, isPrivate, targetId) VALUES 
+            (null, '${imgUrl}', '${d}', '${comment}','${ownerId}','${isPrivate}','${targetId}')`);
       res.status(200).json({ message: "Upload successfully uploaded!" });
     } catch (err) {
       console.error("Error posting ads!", err.message);
@@ -59,6 +59,7 @@ const postController = {
         (await dbFunctions.execQueryWithReturn(`
             SELECT * FROM uploads WHERE id = '${id}'`)) || [];
       const ad = rows[0];
+      console.log(ad)
       if (ad === undefined) {
         return res.status(404).json({ message: "Ad not found" });
       }

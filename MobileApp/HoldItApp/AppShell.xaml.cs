@@ -21,13 +21,10 @@ namespace HoldItApp
             Routing.RegisterRoute(nameof(FollowedPage), typeof(FollowedPage));                        
             Routing.RegisterRoute(nameof(SupportPage), typeof(SupportPage));            
             Routing.RegisterRoute(nameof(ResetPwdCodePage), typeof(ResetPwdCodePage));
-            Routing.RegisterRoute(nameof(ResetPwdFinalStagePage), typeof(ResetPwdFinalStagePage));
-            Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+            Routing.RegisterRoute(nameof(ResetPwdFinalStagePage), typeof(ResetPwdFinalStagePage));            
             Routing.RegisterRoute(nameof(PopUpUploadPage), typeof(PopUpUploadPage));
-
-            Routing.RegisterRoute(nameof(PageTester), typeof(PageTester));
-
-
+            Routing.RegisterRoute(nameof(PrivateTimelinePageViewModel), typeof(PrivateTimelinePageViewModel));
+            Routing.RegisterRoute(nameof(SupportPage), typeof(SupportPage));            
         }       
     }
 }

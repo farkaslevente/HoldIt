@@ -40,21 +40,20 @@ public partial class ProfilePage : ContentPage
     private async void followedBTN_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(FollowedPage));
-    }
-
-    private async void uploadBTN_Clicked(object sender, EventArgs e)
-    {
-        await SecureStorage.SetAsync("fromPP", true.ToString());
-        Shell.Current.ShowPopup(new PopUpUploadPage());        
-    }
+    }    
 
     private async void timelineBTN_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(TimelinePage));
     }
 
-    private async void settingsBTN_Clicked(object sender, EventArgs e)
+    private async void homeBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(SettingsPage));
+        await Shell.Current.GoToAsync(nameof(HomePage));
+    }
+
+    private async void suppport_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(SupportPage));
     }
 }

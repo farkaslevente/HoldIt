@@ -51,7 +51,16 @@ public partial class TimelinePage : ContentPage
 
     private async void settingsBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(SettingsPage));
+        string uName = await SecureStorage.GetAsync("userName");
+        if (uName.IsNullOrEmpty())
+        {
+            //Incognito support page as soon as the user manual is completed
+            await Shell.Current.GoToAsync(nameof(SupportPage));
+        }
+        else
+        {
+            await Shell.Current.GoToAsync(nameof(SupportPage));
+        }
     }
     private void uploadBTN_Clicked(object sender, EventArgs e)
     {

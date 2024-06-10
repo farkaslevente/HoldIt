@@ -476,12 +476,14 @@ namespace HoldItApp.Services
             }
         }
            
-        public static async Task<string> newPostUpload(string imgUrl, string comment, int ownerId)
+        public static async Task<string> newPostUpload(string imgUrl, string comment, int ownerId, int isPrivate, int targetId)
         {
             string jsonData = JsonConvert.SerializeObject(new {
                 imgUrl = imgUrl,
                 comment = comment,
-                ownerId = ownerId
+                ownerId = ownerId,
+                isPrivate = isPrivate,
+                targetId = targetId
             });           
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
