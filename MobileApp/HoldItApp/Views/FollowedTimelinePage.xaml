@@ -1,12 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="HoldItApp.Views.FollowedTimelinePage"
              Title="FollowedTimelinePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="*,50,20">
+        <ScrollView Margin="0,0,0,0" VerticalScrollBarVisibility="Never" x:Name="MyScrollView">
+            <Grid RowDefinitions="*">
+                <CollectionView ItemsSource="{Binding posts}" 
+                        Grid.Row="0" 
+                        Margin="0,10,0,0" 
+                        SelectionMode="Single" 
+                        SelectionChangedCommand="{Binding infoCommand}"
+                        SelectedItem="{Binding selectedPost}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*" Margin="0,10,0,10">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid Grid.Column="{Binding gridColumn}" ColumnDefinitions="20,*,20">
+                                    <!--<Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>-->
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label  Text="{Binding time}" FontSize="12" TextColor="Black"/>
+
+                                        <Border Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
+                                            <VerticalStackLayout>
+                                                <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
+                                                <Label x:Name="LBComment" Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10">
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding comment}" Value="">
+                                                            <Setter Property="IsVisible" Value="False" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                                <!--<Label x:Name="LBComment" Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10" >
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding comment}" Value="{x:Static sys:String.Empty}">
+                                                        <Setter Property="IsVisible" Value="False" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding comment}">
+                                                        <Setter Property="IsVisible" Value="True" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>-->
+                                            </VerticalStackLayout>
+                                        </Border>
+                                        <Label Text="{Binding ownerName}" FontSize="12" TextColor="Black"/>
+                                    </VerticalStackLayout>
+                                    <Border StrokeShape="RoundRectangle 10"  Grid.Column="{Binding ownerPicPos}" MaximumHeightRequest="20" VerticalOptions="End">
+                                        <svg:SvgCachedImage 
+                                            Source="{Binding ownerPic}"
+                                            Aspect="AspectFill">
+                                        </svg:SvgCachedImage>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </ScrollView>
+
+        <Grid Grid.Row="1" RowDefinitions="10,40" ColumnDefinitions="*,*,1.25*,*,*">
+            <ImageButton x:Name="profileBTN" Source="darkprofile.svg"   Clicked="profileBTN_Clicked"  Grid.Column="0" Grid.Row="1" />
+            <ImageButton x:Name="followedBTN" Source="darkmessages.svg" Clicked="followedBTN_Clicked" Grid.Column="1" Grid.Row="1" />
+            <ImageButton x:Name="uploadBTN" Source="add.svg"            Clicked="uploadBTN_Clicked"   Grid.Column="2" Grid.RowSpan="2"/>
+            <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1"/>
+            <ImageButton x:Name="settingsBTN" Source="darksettings.svg" Clicked="settingsBTN_Clicked" Grid.Column="4" Grid.Row="1"/>
+        </Grid>
+    </Grid>
 </ContentPage>

@@ -54,6 +54,7 @@ namespace HoldItApp.ViewModels
 
         public ICommand uploadCommand { get; set; }
         public ICommand imageUploadCommand { get; set; }
+        public ICommand privateUploadCommand { get; set; }
         public PopUpViewModel()
         {
             imageUploadCommand = new Command(async () =>
@@ -71,6 +72,26 @@ namespace HoldItApp.ViewModels
                     imageId = int.Parse(await SecureStorage.GetAsync("imgId")) + 1;
                     UploadedImgUrl = $"{DataService.url}/uploads/{response}";                    
                 }
+            });
+            privateUploadCommand = new Command(async () =>
+            {
+                int userId = Int32.Parse(await SecureStorage.GetAsync("userId"));
+                int targetId = Int32.Parse(await SecureStorage.GetAsync("targetId"));                
+                if (UploadedImgUrl.IsNullOrEmpty())
+                {
+                    UploadedImgUrl = "onebyone.png";
+                }
+                await DataService.newPostUpload(
+                                                   UploadedImgUrl,
+                                                   comment,
+                                                   userId,
+                                                   1,
+                                                   targetId
+                                                   );
+                //if (await SecureStorage.GetAsync("uploaded") == true.ToString())
+                //{
+                //    await Shell.Current.GoToAsync("..");
+                //}
             });
             uploadCommand = new Command(async () =>
             {

@@ -30,8 +30,11 @@ namespace HoldItApp.ViewModels
             userSelectionCommand = new Command(() =>
             {
                 if (followedUser == null) return;
-                Shell.Current.ShowPopup(new PopUpUserPage(followedUser));
-
+                //Shell.Current.ShowPopup(new PopUpUserPage(followedUser));
+                Shell.Current.GoToAsync(nameof(FollowedTimelinePage),
+                                new Dictionary<string, object> {
+                                    { "followedUser",  followedUser},
+                                    });
                 followedUser = null;
                 OnPropertyChanged(nameof(followedUser));
             });

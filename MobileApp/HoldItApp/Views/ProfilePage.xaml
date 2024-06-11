@@ -74,19 +74,19 @@
                                     HeightRequest="100" 
                                     WidthRequest="100"
                                     Margin="3">
-                                    <Image Source="{Binding .}"                                   
+                                <Image Source="{Binding .}"                                   
                                        Aspect="AspectFill">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroup Name="CommonStates">
-                                            <VisualState Name="Normal" />
-                                            <VisualState Name="Selected">
-                                                <VisualState.Setters>
-                                                    <Setter Property="BackgroundColor" Value="Transparent" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                        </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
                                 </Image>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -99,7 +99,7 @@ ColumnDefinitions="*,*,*,*,*" Margin="0,0,0,10">
             <ImageButton x:Name="followedBTN" Source="darkmessages.svg" Clicked="followedBTN_Clicked" Grid.Column="1" Grid.Row="1" />
             <ImageButton x:Name="homeBTN" Source="home.svg"            Clicked="homeBTN_Clicked" Grid.Column="2" Grid.RowSpan="2"/>
             <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1"/>
-            <ImageButton x:Name="suppport" Source="supportwhite.svg" Clicked="suppport_Clicked" Grid.Column="4" Grid.Row="1"/>
+            <ImageButton x:Name="suppport" Source="support.svg" Clicked="suppport_Clicked" Grid.Column="4" Grid.Row="1"/>
         </Grid>
     </Grid>
 </ContentPage>

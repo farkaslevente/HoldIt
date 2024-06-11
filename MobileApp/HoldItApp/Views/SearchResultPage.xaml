@@ -38,48 +38,51 @@
             <!--User Results-->
             
             <!--Post Results-->
-            <CollectionView Grid.Row="1"
-                ItemsSource="{Binding postResults}"
-                SelectionMode="Single"
-                SelectedItem="{Binding selectedPost}"
-                SelectionChangedCommand="{Binding postSelectionCommand}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="*,*" Margin="0,10,0,10">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal" />
-                                    <VisualState Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="Transparent" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Grid Grid.Column="{Binding gridColumn}" ColumnDefinitions="20,*,20">
-                                <VerticalStackLayout Grid.Column="1">
-                                    <Label  Text="{Binding time}" FontSize="12" TextColor="Black"/>
+            <Grid RowDefinitions="auto,auto" Margin="10">
+                <Label Text="Found Posts" Grid.Row="0" FontAttributes="Bold"/>
+                    <CollectionView Grid.Row="1"
+                    ItemsSource="{Binding postResults}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding selectedPost}"
+                    SelectionChangedCommand="{Binding postSelectionCommand}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*" Margin="0,10,0,10">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid Grid.Column="{Binding gridColumn}" ColumnDefinitions="20,*,20">
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label  Text="{Binding time}" FontSize="12" TextColor="Black"/>
 
-                                    <Border Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
-                                        <VerticalStackLayout>
-                                            <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
+                                        <Border Background="{Binding messageColor}" StrokeShape="RoundRectangle 10" >
+                                            <VerticalStackLayout>
+                                                <Image Source="{Binding imgUrl}" VerticalOptions="Fill"/>
 
-                                            <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10" />
-                                        </VerticalStackLayout>
+                                                <Label Text="{Binding comment}" TextColor="{Binding textColor}" FontSize="15" Margin="10" />
+                                            </VerticalStackLayout>
+                                        </Border>
+                                        <Label Text="{Binding ownerName}" FontSize="12" TextColor="Black"/>
+                                    </VerticalStackLayout>
+                                    <Border StrokeShape="RoundRectangle 10"  Grid.Column="{Binding ownerPicPos}" MaximumHeightRequest="20" VerticalOptions="End">
+                                        <svg:SvgCachedImage 
+                            Source="{Binding ownerPic}"
+                            Aspect="AspectFill">
+                                        </svg:SvgCachedImage>
                                     </Border>
-                                    <Label Text="{Binding ownerName}" FontSize="12" TextColor="Black"/>
-                                </VerticalStackLayout>
-                                <Border StrokeShape="RoundRectangle 10"  Grid.Column="{Binding ownerPicPos}" MaximumHeightRequest="20" VerticalOptions="End">
-                                    <svg:SvgCachedImage 
-                        Source="{Binding ownerPic}"
-                        Aspect="AspectFill">
-                                    </svg:SvgCachedImage>
-                                </Border>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
         </Grid>
     </ScrollView>
 </ContentPage>

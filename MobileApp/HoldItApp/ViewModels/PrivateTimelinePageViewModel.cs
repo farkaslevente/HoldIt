@@ -13,17 +13,18 @@ using System.Windows.Input;
 
 namespace HoldItApp.ViewModels
 {
-    public class PrivateTimelinePageViewModel: BindableObject
+    public class PrivateTimelinePageViewModel: BindableObject, IQueryAttributable
     {
         public ObservableCollection<PostModel> posts { get; set; }
+        public ObservableCollection<UserModel> users { get; set; }
         public PostModel selectedPost { get; set; }
-        public ICommand infoCommand { get; set; }
-        public bool first { get; set; }
+        public UserModel target { get; set; }
+        public ICommand infoCommand { get; set; }        
         private System.Timers.Timer _refreshTimer;
         public PrivateTimelinePageViewModel()
-        {
-            first = true;
+        {           
             posts = new ObservableCollection<PostModel>();
+            users = new ObservableCollection<UserModel>();
             getAllPosts();
             infoCommand = new Command(() =>
             {
@@ -36,6 +37,27 @@ namespace HoldItApp.ViewModels
 
 
         }
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.ContainsKey("followedUser"))
+            {
+                target = query["followedUser"] as UserModel;
+                await SecureStorage.SetAsync("targetId", target.id.ToString());
+                    //userResults = query["resultsUsers"] as ObservableCollection<UserModel>;
+            }
+
+
+
+        }
+        private async Task getUsers()
+        {
+            users.Clear();
+            IEnumerable<UserModel> list = await DataService.getProfiles();
+            list.ToList().ForEach(fn => {
+                users.Add(fn);
+            });
+        }
+
         private void InitializeTimer()
         {
             _refreshTimer = new System.Timers.Timer();
@@ -52,21 +74,16 @@ namespace HoldItApp.ViewModels
             List<PostModel> postsToAdd = new List<PostModel>();
 
             foreach (var fn in list)
-            {
-                if (fn.isPrivate == 1)
+            {                
+                if (fn.isPrivate == 1 && ((fn.ownerId == Convert.ToInt32(userId) && fn.targetId == target.id)||(fn.ownerId == target.id && fn.targetId == Convert.ToInt32(userId))))
                 {
-                    if (userId.IsNullOrEmpty())
-                    {
-                        userId = "0";
-                    }
                     if (!posts.Any(item => item.id == fn.id))
-                    {
-                        UserModel owner = await DataService.getProfileById(fn.ownerId);
+                    {                        
+                        UserModel owner = users.Where(x => x.id == fn.ownerId).First();
                         fn.ownerPic = owner.pPic;
 
                         string[] butcheredDate = fn.time.Split(" ");
                         fn.time = $"{butcheredDate[1]}. {butcheredDate[2]}. {butcheredDate[4].Split(':')[0]}:{butcheredDate[4].Split(':')[1]}";
-
 
                         fn.gridColumn = fn.ownerId == Int32.Parse(userId) ? 1 : 0;
                         fn.messageColor = fn.ownerId == Int32.Parse(userId) ? Colors.Blue : Colors.Black;
@@ -93,20 +110,17 @@ namespace HoldItApp.ViewModels
             }
         }
 
-        private async void getAllPosts()
+        private async Task getAllPosts()
         {
-            string userId = await SecureStorage.GetAsync("userId");
-            if (userId.IsNullOrEmpty())
-            {
-                userId = "0";
-            }
+            await getUsers();
+            string userId = await SecureStorage.GetAsync("userId");    
             posts.Clear();
             IEnumerable<PostModel> list = await DataService.getPosts();
             list.ToList().ForEach(async fn =>
             {
-                if (fn.isPrivate == 1)
+                if (fn.isPrivate == 1 && ((fn.ownerId == Convert.ToInt32(userId) && fn.targetId == target.id) || (fn.ownerId == target.id && fn.targetId == Convert.ToInt32(userId))))            
                 {
-                    UserModel owner = await DataService.getProfileById(fn.ownerId);
+                    UserModel owner = users.Where(x => x.id == fn.ownerId).First();
                     fn.ownerPic = owner.pPic;
                     fn.ownerPicPos = fn.ownerId == Int32.Parse(userId) ? 2 : 0;
                     fn.ownerName = owner.name;

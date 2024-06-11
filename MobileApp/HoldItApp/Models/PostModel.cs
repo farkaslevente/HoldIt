@@ -14,6 +14,7 @@ namespace HoldItApp.Models
         public string comment { get; set; }
         public int ownerId { get; set; }
         public int isPrivate { get; set; }
+        public int targetId { get; set; }
         public string ownerName { get; set; }
         public string ownerNamePos { get; set; }
         public string ownerPic { get; set; }
