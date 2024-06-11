@@ -9,11 +9,21 @@ namespace HoldItApp.Views;
 
 public partial class TimelinePage : ContentPage
 {
-    public ObservableCollection<PostModel> posts { get; set; }
+    public ObservableCollection<PostModel> tempposts { get; set; }
     public TimelinePage()
 	{
-		InitializeComponent();
-        posts = new ObservableCollection<PostModel>();
+        LOAD();
+		
+    }
+
+    private async void LOAD()
+    {
+        
+        TimelinePageViewModel TLPVM = new TimelinePageViewModel();        
+        this.BindingContext = TLPVM;                
+        tempposts = TLPVM.posts;
+        InitializeComponent();
+        CVPosts.ScrollTo(10);
     }
 
     private async void profileBTN_Clicked(object sender, EventArgs e)

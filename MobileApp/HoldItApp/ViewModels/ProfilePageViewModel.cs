@@ -177,8 +177,11 @@ namespace HoldItApp.ViewModels
         {
             userImages.Clear();
             int userId;
-            string userIdString = await SecureStorage.GetAsync("userId");            
-            user = await DataService.getProfileById(Convert.ToInt32(userIdString));
+            string userIdString = await SecureStorage.GetAsync("userId");
+            if (!userIdString.IsNullOrEmpty())
+            {
+                user = await DataService.getProfileById(Convert.ToInt32(userIdString));
+            }            
             userId = string.IsNullOrEmpty(userIdString) ? 0 : Int32.Parse(userIdString);
             IEnumerable<string> list = await DataService.getUploads();
             list.ToList().ForEach(fn => {

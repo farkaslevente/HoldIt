@@ -7,9 +7,9 @@
              x:Class="HoldItApp.Views.TimelinePage"
              Title=""
              Shell.NavBarIsVisible="False">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <viewmodels:TimelinePageViewModel/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <Grid RowDefinitions="*,50,20">
     <ScrollView Margin="0,0,0,0" VerticalScrollBarVisibility="Never" x:Name="MyScrollView">
         <Grid RowDefinitions="*">
@@ -18,7 +18,9 @@
                             Margin="0,10,0,0" 
                             SelectionMode="Single" 
                             SelectionChangedCommand="{Binding infoCommand}"
-                            SelectedItem="{Binding selectedPost}">
+                            SelectedItem="{Binding selectedPost}"
+                            x:Name="CVPosts"
+                            ItemsUpdatingScrollMode="KeepLastItemInView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                             <Grid ColumnDefinitions="*,*" Margin="0,10,0,10">
