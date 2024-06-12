@@ -17,12 +17,11 @@ public partial class TimelinePage : ContentPage
     }
 
     private async void LOAD()
-    {
-        
-        TimelinePageViewModel TLPVM = new TimelinePageViewModel();        
+    {        
+        InitializeComponent();
+	TimelinePageViewModel TLPVM = new TimelinePageViewModel();        
         this.BindingContext = TLPVM;                
         tempposts = TLPVM.posts;
-        InitializeComponent();
         CVPosts.ScrollTo(10);
     }
 
