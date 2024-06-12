@@ -1,3 +1,4 @@
+using AndroidX.Lifecycle;
 using CommunityToolkit.Maui.Views;
 using HoldItApp.Models;
 using HoldItApp.Services;
@@ -10,19 +11,13 @@ namespace HoldItApp.Views;
 public partial class TimelinePage : ContentPage
 {
     public ObservableCollection<PostModel> tempposts { get; set; }
+    public TimelinePageViewModel vm { get; set; }
     public TimelinePage()
 	{
-        LOAD();
-		
-    }
-
-    private async void LOAD()
-    {        
         InitializeComponent();
-	TimelinePageViewModel TLPVM = new TimelinePageViewModel();        
-        this.BindingContext = TLPVM;                
-        tempposts = TLPVM.posts;
-        CVPosts.ScrollTo(10);
+        vm = new TimelinePageViewModel();
+        this.BindingContext = vm;
+
     }
 
     private async void profileBTN_Clicked(object sender, EventArgs e)
@@ -74,5 +69,16 @@ public partial class TimelinePage : ContentPage
     private void uploadBTN_Clicked(object sender, EventArgs e)
     {
         Shell.Current.ShowPopup(new PopUpUploadPage());
-    }        
+    }
+    private void CVPosts_SizeChanged(object sender, EventArgs e)
+    {
+        if (CVPosts.ItemsSource != null && vm.posts != null && vm.posts.Any())
+        {           
+            CVPosts.Dispatcher.Dispatch(new Action(() =>
+            {
+                PostModel pm = vm.posts[vm.posts.Count() - 1];
+                CVPosts.ScrollTo(pm, null, ScrollToPosition.End, true);
+            }));
+        }
+    }
 }

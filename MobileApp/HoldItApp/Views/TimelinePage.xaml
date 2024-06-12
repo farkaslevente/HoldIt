@@ -13,13 +13,14 @@
     <Grid RowDefinitions="*,50,20">
     <ScrollView Margin="0,0,0,0" VerticalScrollBarVisibility="Never" x:Name="MyScrollView">
         <Grid RowDefinitions="*">
-            <CollectionView ItemsSource="{Binding posts}" 
+                <CollectionView x:Name="CVPosts"         
+                            ItemsSource="{Binding posts}" 
                             Grid.Row="0" 
                             Margin="0,10,0,0" 
                             SelectionMode="Single" 
                             SelectionChangedCommand="{Binding infoCommand}"
-                            SelectedItem="{Binding selectedPost}"
-                            x:Name="CVPosts"
+                            SelectedItem="{Binding selectedPost}"                                               
+                            SizeChanged="CVPosts_SizeChanged"
                             ItemsUpdatingScrollMode="KeepLastItemInView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
