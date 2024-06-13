@@ -1,4 +1,3 @@
-using AndroidX.Lifecycle;
 using CommunityToolkit.Maui.Views;
 using HoldItApp.Models;
 using HoldItApp.Services;
@@ -15,8 +14,8 @@ public partial class TimelinePage : ContentPage
     public TimelinePage()
 	{
         InitializeComponent();
-        vm = new TimelinePageViewModel();
-        this.BindingContext = vm;
+        //vm = new TimelinePageViewModel();
+        //this.BindingContext = vm;
 
     }
 
@@ -73,12 +72,9 @@ public partial class TimelinePage : ContentPage
     private void CVPosts_SizeChanged(object sender, EventArgs e)
     {
         if (CVPosts.ItemsSource != null && vm.posts != null && vm.posts.Any())
-        {           
-            CVPosts.Dispatcher.Dispatch(new Action(() =>
-            {
-                PostModel pm = vm.posts[vm.posts.Count() - 1];
-                CVPosts.ScrollTo(pm, null, ScrollToPosition.End, true);
-            }));
+        {
+            PostModel pm = vm.posts.LastOrDefault();            
+            CVPosts.ScrollTo(pm, position: ScrollToPosition.End);
         }
-    }
+    } 
 }

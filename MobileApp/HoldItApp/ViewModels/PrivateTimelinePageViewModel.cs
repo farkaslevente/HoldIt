@@ -42,8 +42,7 @@ namespace HoldItApp.ViewModels
             if (query.ContainsKey("followedUser"))
             {
                 target = query["followedUser"] as UserModel;
-                await SecureStorage.SetAsync("targetId", target.id.ToString());
-                    //userResults = query["resultsUsers"] as ObservableCollection<UserModel>;
+                await SecureStorage.SetAsync("targetId", target.id.ToString());                    
             }
 
 

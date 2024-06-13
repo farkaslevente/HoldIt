@@ -49,7 +49,7 @@ public partial class HomePage : ContentPage
         else
         {            
             string fileName = await DataService.CaptureAndUploadImageAsync(Convert.ToInt32(uId), 0, cv);
-            string result = await DataService.newPostUpload($"http://192.168.0.165:9000/uploads/{fileName}", PPVM.comment, Convert.ToInt32(fileName.Split("_")[0]),0,0);
+            string result = await DataService.newPostUpload($"{DataService.url}/uploads/{fileName}", PPVM.comment, Convert.ToInt32(fileName.Split("_")[0]),0,0);
             if (result == "error") {
                 await DisplayAlert("Something went wrong...", "An error occured while we uploaded your post, please try again later.", "Back");
             }

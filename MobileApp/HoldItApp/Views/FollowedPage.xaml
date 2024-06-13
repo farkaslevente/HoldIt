@@ -9,14 +9,16 @@
     <ContentPage.BindingContext>
         <vm:FollowedPageViewModel/>
     </ContentPage.BindingContext>
-    <Grid>
-        <CollectionView ItemsSource="{Binding followedUsers}"
-                        SelectedItem="{Binding followedUser}"
-                        SelectionMode="Single"
-                        SelectionChangedCommand="{Binding userSelectionCommand}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border>
+    <Grid RowDefinitions="*,40,5">
+        <Grid Grid.Row="0" RowDefinitions="50,*">
+            <Label Text="Contacts" FontSize="30" Grid.Row="0" HorizontalTextAlignment="Center"/>
+            <CollectionView ItemsSource="{Binding followedUsers}"
+                    SelectedItem="{Binding followedUser}"
+                    SelectionMode="Single"
+                    SelectionChangedCommand="{Binding userSelectionCommand}"
+                        Grid.Row="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
                         <Grid ColumnDefinitions="*,4*" RowDefinitions="65" Margin="10" ColumnSpacing="10">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup Name="CommonStates">
@@ -33,9 +35,15 @@
                             </Border>
                             <Label Text="{Binding name}" FontSize="20" FontAttributes="Bold" Grid.Column="1"/>
                         </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*">
+            <ImageButton x:Name="profileBTN" Source="darkprofile.svg" Clicked="profileBTN_Clicked"  Grid.Column="0" Padding="3"/>
+            <ImageButton x:Name="homeBTN" Source="home.svg" Clicked="homeBTN_Clicked" Grid.Column="1"  Padding="3"/>
+            <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="2" Padding="3"/>
+        </Grid>
     </Grid>
+    
 </ContentPage>
