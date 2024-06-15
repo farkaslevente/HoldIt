@@ -80,7 +80,7 @@ namespace HoldItApp.ViewModels
 
                 foreach (var post in posts)
                 {
-                    if (post.comment.ToLower().Contains(searchParam.ToLower()))
+                    if (post.comment.ToLower().Contains(searchParam.ToLower()) && post.isPrivate == 0)
                     {
                         resultPosts.Add(post);
                     }

@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="HoldItApp.Views.SearchResultPage"
-             Title="SearchResultPage">
+             Title="SearchResultPage"
+             Shell.NavBarIsVisible="False">
     <ScrollView>
-        <Grid RowDefinitions="auto,auto" ColumnDefinitions="*">
-            <Grid RowDefinitions="auto,auto" Margin="10">
+        <Grid RowDefinitions="auto,auto" ColumnDefinitions="*" RowSpacing="10">
+            <Grid RowDefinitions="30,auto" Margin="10" Grid.Row="0" MinimumHeightRequest="50">
                 <Label Text="Found Users" Grid.Row="0" FontAttributes="Bold"/>
                 <CollectionView Grid.Row="1"
                 ItemsSource="{Binding userResults}"
@@ -38,7 +39,7 @@
             <!--User Results-->
             
             <!--Post Results-->
-            <Grid RowDefinitions="auto,auto" Margin="10">
+            <Grid RowDefinitions="auto,auto" Margin="10" Grid.Row="1">
                 <Label Text="Found Posts" Grid.Row="0" FontAttributes="Bold"/>
                     <CollectionView Grid.Row="1"
                     ItemsSource="{Binding postResults}"

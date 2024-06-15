@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:HoldItApp.ViewModels"
              x:Class="HoldItApp.Views.ForgottenPwdPage"
-             Title="ForgottenPwdPage">
+             Title="ForgottenPwdPage"
+             Shell.NavBarIsVisible="False">
     <ContentPage.BindingContext>
             <viewmodels:RegisterViewModel/>
         </ContentPage.BindingContext>
@@ -25,7 +26,7 @@
 
             <Label Text="E-mail:"/>
             <Frame CornerRadius="10" Padding="3" Margin="0,10,0,15">
-                <Entry FontSize="18" Placeholder="E-mail cím" Margin="5,0,5,0"
+                <Entry FontSize="18" Placeholder="E-mail" Margin="5,0,5,0"
              Text="{Binding resetEmail}"/>
             </Frame>
 

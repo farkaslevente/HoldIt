@@ -62,8 +62,8 @@ namespace HoldItApp.ViewModels
             ownerName = pm.ownerName;
             ownerPic = pm.ownerPic;
             imgUrl = pm.imgUrl;
-            comment = pm.comment;
-                      
+            comment = pm.comment;            
+              
             followCommand = new Command(async () =>
             {
                 string uName = await SecureStorage.GetAsync("userName");
@@ -100,52 +100,23 @@ namespace HoldItApp.ViewModels
         }
 
         private async void getFollowed()
-        {
-            //await getUsers();
+        {            
             int userId = Int32.Parse(await SecureStorage.GetAsync("userId"));
             UserModel user = await DataService.getProfileById(userId);            
             string[] followedArray = user.followed.Split(" +");
-            followedArray = followedArray.Take(followedArray.Length - 1).ToArray();            
-            isVisibleInvers = followedArray.Contains(post.ownerId.ToString());
-            isVisible = !isVisibleInvers;
-            
-            //foreach (var potentiallyFollowed in allUsers)
-            //{
-            //    foreach (var id in followedArray)
-            //    {
-            //        if (potentiallyFollowed.id == Int32.Parse(id) && !id.IsNullOrEmpty())
-            //        {
-            //            followedUsers.Add(potentiallyFollowed);
-            //            if(potentiallyFollowed.id == ownerId)
-            //            {
-            //                targetUser = potentiallyFollowed;
-            //            }
-            //        }
-            //    }
+            followedArray = followedArray.Take(followedArray.Length - 1).ToArray();
+            string fromPM = await SecureStorage.GetAsync("fromPM");
+            if ( fromPM == "True")
+            {
+                isVisible = false;
+                isVisibleInvers = false;
+            }
+            else
+            {
+                isVisibleInvers = followedArray.Contains(post.ownerId.ToString());
+                isVisible = !isVisibleInvers;
+            }
 
-            //}
-            //    if (!followedUsers.Contains(targetUser)|| targetUser == null)
-            //{
-            //    //Follow
-            //    isVisibleInvers = false;
-            //    isVisible = true;
-            //}
-            //else
-            //{
-            //    //Unfollow
-            //    isVisibleInvers = true;
-            //    isVisible = false;
-            //}
-
-        }
-        private async Task getUsers()
-        {
-            allUsers.Clear();
-            IEnumerable<UserModel> list = await DataService.getProfiles();
-            list.ToList().ForEach(fn => {
-                allUsers.Add(fn);
-
-            });
-        }
+        }       
     }
 }

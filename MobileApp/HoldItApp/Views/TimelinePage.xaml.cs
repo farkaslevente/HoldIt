@@ -13,9 +13,7 @@ public partial class TimelinePage : ContentPage
     public TimelinePageViewModel vm { get; set; }
     public TimelinePage()
 	{
-        InitializeComponent();
-        //vm = new TimelinePageViewModel();
-        //this.BindingContext = vm;
+        InitializeComponent();       
 
     }
 
@@ -47,11 +45,6 @@ public partial class TimelinePage : ContentPage
 
     }
 
-    private async void timelineBTN_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(TimelinePage));
-    }
-
     private async void settingsBTN_Clicked(object sender, EventArgs e)
     {
         string uName = await SecureStorage.GetAsync("userName");
@@ -76,5 +69,10 @@ public partial class TimelinePage : ContentPage
             PostModel pm = vm.posts.LastOrDefault();            
             CVPosts.ScrollTo(pm, position: ScrollToPosition.End);
         }
-    } 
+    }
+
+    private async void homeBTN_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(HomePage));
+    }
 }

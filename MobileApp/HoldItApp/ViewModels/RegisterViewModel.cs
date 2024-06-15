@@ -43,7 +43,7 @@ namespace HoldItApp.ViewModels
             resetPwdCommand = new Command(async () =>
             {
                 await DataService.resetPwd(resetEmail);
-                await Shell.Current.DisplayAlert("Ellenőrizze postaládáját", "A jelszó visszaállításhoz szükséges információkat elküldtük a megadott emailcímre", "Rendben");
+                await Shell.Current.DisplayAlert("Verification email sent", "Before resetting your password please check your incoming emails for our verification letter", "Okay");
                 await Shell.Current.GoToAsync(nameof(ResetPwdCodePage));
             });
             resetPwdCodeCommand = new Command(async () =>

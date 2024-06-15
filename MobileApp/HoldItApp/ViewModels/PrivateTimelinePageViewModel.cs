@@ -38,9 +38,10 @@ namespace HoldItApp.ViewModels
             posts = new ObservableCollection<PostModel>();
             users = new ObservableCollection<UserModel>();
             getAllPosts();
-            infoCommand = new Command(() =>
+            infoCommand = new Command(async () =>
             {
                 if (selectedPost == null) return;
+                await SecureStorage.SetAsync("fromPM", true.ToString());
                 Shell.Current.ShowPopup(new PopUpDetailsPage(selectedPost));
 
                 selectedPost = null;

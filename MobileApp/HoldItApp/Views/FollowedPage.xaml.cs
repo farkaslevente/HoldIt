@@ -11,7 +11,7 @@ public partial class FollowedPage : ContentPage
 
     private async void homeBTN_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(MainPage));
+        await Shell.Current.GoToAsync(nameof(HomePage));
     }
 
     private async void timelineBTN_Clicked(object sender, EventArgs e)
