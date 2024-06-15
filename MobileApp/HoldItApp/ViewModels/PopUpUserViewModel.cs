@@ -65,11 +65,10 @@ namespace HoldItApp.ViewModels
             IEnumerable<PostModel> list = await DataService.getPosts();
             foreach (var fn in list)
             {
-                if (fn.ownerId == user.id)
-                {
-                    UserModel owner = await DataService.getProfileById(fn.ownerId);
-                    fn.ownerPic = owner.pPic;
-                    fn.ownerName = owner.name;
+                if (fn.ownerId == user.id && fn.isPrivate == 0)
+                {                    
+                    fn.ownerPic = user.pPic;
+                    fn.ownerName = user.name;
                     posts.Add(fn);
                 }
             }

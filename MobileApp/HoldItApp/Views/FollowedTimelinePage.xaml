@@ -6,11 +6,16 @@
              Title="FollowedTimelinePage"
              Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="70,*">
-        <Grid RowDefinitions="*,*" Margin="10" Grid.Row="0" HorizontalOptions="Start">
-            <Border StrokeShape="RoundRectangle 100" HeightRequest="50" WidthRequest="50" Grid.RowSpan="2">
-            <Image Source="{Binding target.pPic}"/>
+        <Grid RowDefinitions="*,*" Margin="10" Grid.Row="0" ColumnDefinitions="30,80,*,30">
+            <ImageButton x:Name="BTNBack" Source="back.svg" Clicked="BTNBack_Clicked" Grid.Column="0" Grid.RowSpan="2"/>
+            <ImageButton x:Name="BTNInfo" Source="info.svg" Clicked="BTNInfo_Clicked" Grid.Column="3" HorizontalOptions="EndAndExpand" Grid.Row="0"/>
+            <Border StrokeShape="RoundRectangle 100" HeightRequest="50" WidthRequest="50" Grid.RowSpan="2" Grid.Column="1">
+                <svg:SvgCachedImage 
+                    Source="{Binding target.pPic}"
+                    Aspect="AspectFill">
+                </svg:SvgCachedImage>
             </Border>
-            <Label Grid.Row="1" Text="{Binding target.name}"/>
+            <Label Grid.Row="0" Text="{Binding target.name}" Grid.Column="2" FontSize="22" HorizontalTextAlignment="Start"/>
         </Grid>
         <Grid RowDefinitions="*,40,5" Grid.Row="1">
             <ScrollView Margin="0,0,0,0" VerticalScrollBarVisibility="Never" x:Name="MyScrollView">
@@ -67,11 +72,7 @@
             </ScrollView>
 
             <Grid Grid.Row="1" RowDefinitions="10,30" ColumnDefinitions="*,*,1.25*,*,*">
-                <ImageButton x:Name="profileBTN" Source="darkprofile.svg"   Clicked="profileBTN_Clicked"  Grid.Column="0" Grid.Row="1" />
-                <ImageButton x:Name="followedBTN" Source="darkmessages.svg" Clicked="followedBTN_Clicked" Grid.Column="1" Grid.Row="1" />
-                <ImageButton x:Name="uploadBTN" Source="add.svg"            Clicked="uploadBTN_Clicked"   Grid.Column="2" Grid.RowSpan="2"/>
-                <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1"/>
-                <ImageButton x:Name="settingsBTN" Source="darksettings.svg" Clicked="settingsBTN_Clicked" Grid.Column="4" Grid.Row="1"/>
+                <ImageButton x:Name="uploadBTN" Source="add.svg" Clicked="uploadBTN_Clicked" Grid.Column="2" Grid.RowSpan="2"/>
             </Grid>
         </Grid>
     </Grid>

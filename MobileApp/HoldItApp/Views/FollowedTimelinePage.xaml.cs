@@ -8,10 +8,12 @@ namespace HoldItApp.Views;
 
 public partial class FollowedTimelinePage : ContentPage
 {
+    private PrivateTimelinePageViewModel vm = new PrivateTimelinePageViewModel();
 	public FollowedTimelinePage()
 	{
-		InitializeComponent();
-		this.BindingContext = new PrivateTimelinePageViewModel();
+        this.BindingContext = vm;
+        InitializeComponent();
+		
 	}
     private async void profileBTN_Clicked(object sender, EventArgs e)
     {
@@ -62,5 +64,15 @@ public partial class FollowedTimelinePage : ContentPage
     private void uploadBTN_Clicked(object sender, EventArgs e)
     {
         Shell.Current.ShowPopup(new PrivateUploadPopUpPage());
+    }
+
+    private async void BTNBack_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private void BTNInfo_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.ShowPopup(new PopUpUserPage(vm.target));
     }
 }

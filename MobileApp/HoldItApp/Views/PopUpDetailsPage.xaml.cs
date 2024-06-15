@@ -8,10 +8,14 @@ public partial class PopUpDetailsPage : Popup
 {    
 
     public PopUpDetailsPage(PostModel pm)
-	{
-        this.BindingContext = new PopUpDetailsViewModel(pm);        
+	{                
         InitializeComponent();
-        
-        
+        this.BindingContext = new PopUpDetailsViewModel(pm);
+
     }
+
+    //private async void Load(PostModel pm)
+    //{
+        
+    //}
 }

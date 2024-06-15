@@ -46,14 +46,17 @@
                             Margin="0,10,0,10">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding .}"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center"
-                               MinimumHeightRequest="50" 
-                               MinimumWidthRequest="50"
-                               MaximumHeightRequest="100"
-                               MaximumWidthRequest="100"
-                               Aspect="AspectFill">
+                            <Border StrokeShape="RoundRectangle 10" Padding="0"
+                                    HeightRequest="75"
+                                    WidthRequest="75"
+                                    Margin="10">
+
+                                <Image Source="{Binding .}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"                                   
+                                   Aspect="AspectFill"
+                                   >
+                                </Image>
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup Name="CommonStates">
                                         <VisualState Name="Normal" />
@@ -64,8 +67,7 @@
                                         </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
-                            </Image>
-
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

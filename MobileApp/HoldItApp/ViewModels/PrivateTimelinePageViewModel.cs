@@ -18,7 +18,19 @@ namespace HoldItApp.ViewModels
         public ObservableCollection<PostModel> posts { get; set; }
         public ObservableCollection<UserModel> users { get; set; }
         public PostModel selectedPost { get; set; }
-        public UserModel target { get; set; }
+        private UserModel _target;
+        public UserModel target
+        {
+            get => _target;
+            set
+            {
+                if (_target != value)
+                {
+                    _target = value;
+                    OnPropertyChanged(nameof(target));
+                }
+            }
+        }
         public ICommand infoCommand { get; set; }        
         private System.Timers.Timer _refreshTimer;
         public PrivateTimelinePageViewModel()
