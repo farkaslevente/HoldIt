@@ -66,59 +66,65 @@ namespace HoldItApp.ViewModels
 
             SearchCommand = new Command(async () =>
             {
-                await getUsers();
-                await getAllPosts();
-                resultUsers.Clear();
-                resultPosts.Clear();
-                foreach (var user in users)
+                if (searchParam.IsNullOrEmpty())
                 {
-                    if (user.name.ToLower().Contains(searchParam.ToLower()))
-                    {
-                        resultUsers.Add(user);
-                    }
+                    await Shell.Current.DisplayAlert("Please enter a search parameter", "Before you iniate our search engine please enter a search parameter", "Okay");
                 }
+                else
+                {                
+                    await getUsers();
+                    await getAllPosts();
+                    resultUsers.Clear();
+                    resultPosts.Clear();
+                    foreach (var user in users)
+                    {
+                        if (user.name.ToLower().Contains(searchParam.ToLower()))
+                        {
+                            resultUsers.Add(user);
+                        }
+                    }
 
-                foreach (var post in posts)
-                {
-                    if (post.comment.ToLower().Contains(searchParam.ToLower()) && post.isPrivate == 0)
+                    foreach (var post in posts)
                     {
-                        resultPosts.Add(post);
+                        if (post.comment.ToLower().Contains(searchParam.ToLower()) && post.isPrivate == 0)
+                        {
+                            resultPosts.Add(post);
+                        }
                     }
-                }
-                if (!resultUsers.IsNullOrEmpty())
-                {
-                    if (!resultPosts.IsNullOrEmpty())
+                    if (!resultUsers.IsNullOrEmpty())
+                    {
+                        if (!resultPosts.IsNullOrEmpty())
+                        {
+                            await Shell.Current.GoToAsync(nameof(SearchResultPage),
+                                    new Dictionary<string, object> {
+                                        { "resultsUsers",  resultUsers},
+                                        { "resultPosts", resultPosts}
+                                        });
+                        }
+                        else
+                        {
+                            await Shell.Current.GoToAsync(nameof(SearchResultPage),
+                                    new Dictionary<string, object> {
+                                        { "resultsUsers",  resultUsers},                        
+                                        });
+                        }
+                    }
+                    else if (!resultPosts.IsNullOrEmpty())
                     {
                         await Shell.Current.GoToAsync(nameof(SearchResultPage),
-                                new Dictionary<string, object> {
-                                    { "resultsUsers",  resultUsers},
-                                    { "resultPosts", resultPosts}
-                                    });
+                                    new Dictionary<string, object> {
+                                        { "resultPosts",  resultPosts},
+                                        });
                     }
                     else
                     {
+                        ObservableCollection<UserModel> emptyResult = new ObservableCollection<UserModel>();
                         await Shell.Current.GoToAsync(nameof(SearchResultPage),
-                                new Dictionary<string, object> {
-                                    { "resultsUsers",  resultUsers},                        
-                                    });
+                                    new Dictionary<string, object> {
+                                        { "emptyResult",  emptyResult},
+                                        });
                     }
                 }
-                else if (!resultPosts.IsNullOrEmpty())
-                {
-                    await Shell.Current.GoToAsync(nameof(SearchResultPage),
-                                new Dictionary<string, object> {
-                                    { "resultPosts",  resultPosts},
-                                    });
-                }
-                else
-                {
-                    ObservableCollection<UserModel> emptyResult = new ObservableCollection<UserModel>();
-                    await Shell.Current.GoToAsync(nameof(SearchResultPage),
-                                new Dictionary<string, object> {
-                                    { "emptyResult",  emptyResult},
-                                    });
-                }
-                
             });
             postDetailCommand = new Command( async() =>
             {

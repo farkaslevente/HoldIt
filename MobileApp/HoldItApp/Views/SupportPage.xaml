@@ -8,14 +8,20 @@
     <ContentPage.BindingContext>
         <vm:SupportViewModel/>
     </ContentPage.BindingContext>
-    <Grid ColumnDefinitions="*,16*,*" RowDefinitions="*,40">
-        <ScrollView Grid.Column="1" Grid.Row="0" VerticalScrollBarVisibility="Never">
-            <Grid RowDefinitions="30,100,50,10,50,50,250,40,50" ColumnDefinitions="2*,*" Margin="0,-20,0,0">
-                <Image Source="smalllogo.png"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"/>
-                <Label Text="Are You interested &#10;in our project?" 
-                       FontSize="25"
+    <Grid ColumnDefinitions="16*" RowDefinitions="*" Margin="10">
+        <ScrollView Grid.Column="0" Grid.Row="0" VerticalScrollBarVisibility="Never">
+            <Grid RowDefinitions="30,100,50,10,50,50,250,50" ColumnDefinitions="2*,*" RowSpacing="5">
+                <Label Text="Help Desk" FontAttributes="Italic" Grid.Row="0" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" FontSize="20"/>
+                <ImageButton x:Name="BTNBack"
+                             Source="back.svg"                             
+                             MaximumHeightRequest="30"
+                             MaximumWidthRequest="60"
+                             Grid.Row="0" Grid.Column="0"
+                             Margin="-180,0,0,0"
+                             Clicked="BTNBack_Clicked"/>
+                <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="10" Margin="10">
+                    <Label Text="Are You interested &#10;in our project?" 
+                       FontSize="20"
                        Grid.Row="1"
                        Grid.Column="0"
                        VerticalTextAlignment="Center"/>
@@ -25,11 +31,13 @@
                         Text="Subscribe"                        
                         Padding="0"
                         Margin="10"
-                        Command="{Binding subscribeCommand}"/>
+                        Command="{Binding subscribeCommand}"
+                        WidthRequest="110"/>
+                </HorizontalStackLayout>
                 <HorizontalStackLayout Grid.Row="2">
                     <Image Source="support.svg"/>
                     <Label Text=" There are questions in Your mind?&#10; Ask us anything!"
-                           FontSize="18"
+                           FontSize="16"
                            Margin="10,0,0,0"/>
                 </HorizontalStackLayout>
                 <Frame CornerRadius="10" Grid.Row="4" Padding="6" Grid.ColumnSpan="2">
@@ -39,7 +47,9 @@
                        FontSize="20"                       
                        FontAttributes="Bold"/>
                 <Frame CornerRadius="10" Grid.Row="6" Padding="6" Grid.ColumnSpan="2">
-                    <Editor Text="{Binding questionContent}"/>
+                    <Editor Text="{Binding questionContent}"
+                            BackgroundColor="Transparent">
+                    </Editor>
                 </Frame>
                 <Button VerticalOptions="Center"                        
                            Grid.Row="8"
@@ -48,7 +58,7 @@
                            FontAttributes="Bold"
                            FontSize="18"
                            Padding="0"
-                           Margin="30,0,30,0"
+                           Margin="30,10,30,0"
                         Command="{Binding supportCommand}"/>
 
             </Grid>

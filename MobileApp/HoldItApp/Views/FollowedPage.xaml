@@ -11,7 +11,7 @@
     </ContentPage.BindingContext>
     <Grid RowDefinitions="*,40,5">
         <Grid Grid.Row="0" RowDefinitions="50,*">
-            <Label Text="Contacts" FontSize="30" Grid.Row="0" HorizontalTextAlignment="Center"/>
+            <Label Text="Your Contacts" FontSize="30" Grid.Row="0" HorizontalTextAlignment="Center" FontAttributes="Italic"/>
             <CollectionView ItemsSource="{Binding followedUsers}"
                     SelectedItem="{Binding followedUser}"
                     SelectionMode="Single"

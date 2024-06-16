@@ -113,6 +113,11 @@ namespace HoldItApp.ViewModels
             }
             else
             {
+                if (post.ownerId != userId) 
+                {
+                    isVisible = false;
+                    isVisibleInvers = false;
+                }
                 isVisibleInvers = followedArray.Contains(post.ownerId.ToString());
                 isVisible = !isVisibleInvers;
             }

@@ -6,8 +6,12 @@
              Title="SearchResultPage"
              Shell.NavBarIsVisible="False">
     <ScrollView>
-        <Grid RowDefinitions="auto,auto" ColumnDefinitions="*" RowSpacing="10">
-            <Grid RowDefinitions="30,auto" Margin="10" Grid.Row="0" MinimumHeightRequest="50">
+        <Grid RowDefinitions="30,auto,auto" ColumnDefinitions="*" RowSpacing="10">
+            <Grid Grid.Row="0" ColumnDefinitions="30,*">
+                <ImageButton Source="back.svg" Clicked="ImageButton_Clicked" Grid.Column="0"/>
+                <Label Text="Results" FontAttributes="Italic" FontSize="20" Grid.Column="1"/>
+            </Grid>
+            <Grid RowDefinitions="30,auto" Margin="10" Grid.Row="1" MinimumHeightRequest="50">
                 <Label Text="Found Users" Grid.Row="0" FontAttributes="Bold"/>
                 <CollectionView Grid.Row="1"
                 ItemsSource="{Binding userResults}"
@@ -39,7 +43,7 @@
             <!--User Results-->
             
             <!--Post Results-->
-            <Grid RowDefinitions="auto,auto" Margin="10" Grid.Row="1">
+            <Grid RowDefinitions="auto,auto" Margin="10" Grid.Row="2">
                 <Label Text="Found Posts" Grid.Row="0" FontAttributes="Bold"/>
                     <CollectionView Grid.Row="1"
                     ItemsSource="{Binding postResults}"

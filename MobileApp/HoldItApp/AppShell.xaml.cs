@@ -25,7 +25,8 @@ namespace HoldItApp
             Routing.RegisterRoute(nameof(ResetPwdFinalStagePage), typeof(ResetPwdFinalStagePage));            
             Routing.RegisterRoute(nameof(PopUpUploadPage), typeof(PopUpUploadPage));
             Routing.RegisterRoute(nameof(PrivateTimelinePageViewModel), typeof(PrivateTimelinePageViewModel));
-            Routing.RegisterRoute(nameof(SupportPage), typeof(SupportPage));            
+            Routing.RegisterRoute(nameof(SupportPage), typeof(SupportPage));
+            Routing.RegisterRoute(nameof(TCPage), typeof(TCPage));
         }       
     }
 }

@@ -6,4 +6,9 @@ public partial class SupportPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void BTNBack_Clicked(object sender, EventArgs e)
+    {
+		await Shell.Current.GoToAsync("..");
+    }
 }

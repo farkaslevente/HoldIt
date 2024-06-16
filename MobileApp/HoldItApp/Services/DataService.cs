@@ -25,15 +25,7 @@ namespace HoldItApp.Services
     {
         public static ObservableCollection<PostModel> posts { get; set; } = new ObservableCollection<PostModel>();             
         
-        public static string url = "http://192.168.0.165:9000";            //Your IP address and PORT number must be here like the example one row above
-
-//   __________ ____  ____ 
-//  /_ __/ __ \/ __ \/ __ \
-//   / // / / / / / / / / /
-//  / // /_/ / /_/ / /_/ / 
-// /_/ \____/_____/\____/  
-// create private messaging in DB, here and on the backend
-// 
+        public static string url = "";            //Your IP address and PORT number must be here like the example one row above
 
         // _    _                                     _               
         //| |  | |                                   (_)              

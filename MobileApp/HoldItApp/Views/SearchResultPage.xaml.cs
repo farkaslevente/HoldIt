@@ -8,4 +8,9 @@ public partial class SearchResultPage : ContentPage
 		InitializeComponent();
 		this.BindingContext = new SearchResultsViewModel();
 	}
+
+    private void ImageButton_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }
