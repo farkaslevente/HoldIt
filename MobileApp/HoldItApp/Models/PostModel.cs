@@ -21,7 +21,7 @@ namespace HoldItApp.Models
         public int ownerPicPos { get; set; }
         public bool ownerFollowed { get; set; }
         public int gridColumn { get; set; }
-        public string textAlingment { get; set; }
+        //public string textAlingment { get; set; }
         public Color messageColor { get; set; }
         public Color textColor { get; set; }
     }

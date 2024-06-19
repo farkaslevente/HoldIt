@@ -101,26 +101,39 @@ namespace HoldItApp.ViewModels
 
         private async void getFollowed()
         {            
-            int userId = Int32.Parse(await SecureStorage.GetAsync("userId"));
-            UserModel user = await DataService.getProfileById(userId);            
-            string[] followedArray = user.followed.Split(" +");
-            followedArray = followedArray.Take(followedArray.Length - 1).ToArray();
-            string fromPM = await SecureStorage.GetAsync("fromPM");
-            if ( fromPM == "True")
+            string userIdString = await SecureStorage.GetAsync("userId");
+            if (userIdString.IsNullOrEmpty()) 
             {
                 isVisible = false;
                 isVisibleInvers = false;
             }
             else
             {
-                if (post.ownerId != userId) 
+                int userId = Int32.Parse(userIdString);
+                UserModel user = await DataService.getProfileById(userId);
+                string[] followedArray = user.followed.Split(" +");
+                followedArray = followedArray.Take(followedArray.Length - 1).ToArray();
+                string fromPM = await SecureStorage.GetAsync("fromPM");
+                if (fromPM == "True")
                 {
                     isVisible = false;
                     isVisibleInvers = false;
                 }
-                isVisibleInvers = followedArray.Contains(post.ownerId.ToString());
-                isVisible = !isVisibleInvers;
+                else
+                {
+                    if (post.ownerId == userId)
+                    {
+                        isVisible = false;
+                        isVisibleInvers = false;
+                    }
+                    else
+                    {
+                        isVisibleInvers = followedArray.Contains(post.ownerId.ToString());
+                        isVisible = !isVisibleInvers;
+                    }
+                }
             }
+            
 
         }       
     }

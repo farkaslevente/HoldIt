@@ -170,7 +170,7 @@ table, td { color: #000000; } #u_body a { color: #01499d; text-decoration: under
   <tr>
     <td style="padding-right: 0px;padding-left: 0px;" align="left">
       <a href="" target="_blank">
-      <img align="left" border="0" src="https://raw.githubusercontent.com/farkaslevente/14AA-D-BazarBunker/Backend/Backend/src/views/images/image-2.png" alt="Logo" title="Logo" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 87%;max-width: 504.6px;" width="504.6" class="v-src-width v-src-max-width"/>
+      <img align="left" border="0" src="https://raw.githubusercontent.com/farkaslevente/HoldIt/master/MobileApp/HoldItApp/Resources/Images/holditlogo.png" alt="Logo" title="Logo" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 87%;max-width: 504.6px;" width="504.6" class="v-src-width v-src-max-width"/>
       </a>
     </td>
   </tr>
@@ -310,9 +310,9 @@ table, td { color: #000000; } #u_body a { color: #01499d; text-decoration: under
       <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:40px 50px 50px;font-family:'Rubik',sans-serif;" align="left">
         
   <div class="v-font-size" style="font-size: 14px; color: #5c5c5c; line-height: 170%; text-align: left; word-wrap: break-word;">
-    <p style="line-height: 170%;"><span style="font-size: 16px; line-height: 27.2px;"><strong>Jelszó igénylési kód</strong></span></p>
+    <p style="line-height: 170%;"><span style="font-size: 16px; line-height: 27.2px;"><strong>Password reset verification code</strong></span></p>
 <p style="line-height: 170%;"> </p>
-<p style="line-height: 170%;"><span style="font-size: 16px; line-height: 27.2px;"><strong>Kérjük jelszava helyreállításának megkezdéséhez adja meg a fenti kódot applikációnkban vagy weboldalunkon.<br /><br />Köszönjük, hogy minket választott!<br />A Bazár Bunker csapata</strong></span></p>
+<p style="line-height: 170%;"><span style="font-size: 16px; line-height: 27.2px;"><strong>Please enter this code into our application<br /><br />Thank you for your trusth!<br />The Team behind Hold it!</strong></span></p>
   </div>
 
       </td>

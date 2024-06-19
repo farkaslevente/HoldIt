@@ -66,6 +66,8 @@ namespace HoldItApp.ViewModels
 
             SearchCommand = new Command(async () =>
             {
+                users = new ObservableCollection<UserModel>();
+                posts = new ObservableCollection<PostModel>();
                 if (searchParam.IsNullOrEmpty())
                 {
                     await Shell.Current.DisplayAlert("Please enter a search parameter", "Before you iniate our search engine please enter a search parameter", "Okay");
@@ -73,7 +75,7 @@ namespace HoldItApp.ViewModels
                 else
                 {                
                     await getUsers();
-                    await getAllPosts();
+                    await getAllAllPosts();
                     resultUsers.Clear();
                     resultPosts.Clear();
                     foreach (var user in users)
@@ -161,6 +163,15 @@ namespace HoldItApp.ViewModels
                 }               
             }
             
+        }
+
+        private async Task getAllAllPosts()
+        {
+            IEnumerable<PostModel> list = await DataService.getPosts();
+            foreach (var fn in list)
+            {              
+                    posts.Add(fn);                
+            }
         }
 
         private async void a()
