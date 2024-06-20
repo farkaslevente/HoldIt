@@ -19,6 +19,7 @@ namespace HoldItApp.ViewModels
         public string uName { get; set; }
         public string uPic { get; set; }
         public ObservableCollection<string> userImages { get; set; }
+        public ObservableCollection<string> privates { get; set; }
         public ObservableCollection<PostModel> posts { get; set; }
         public PostModel selectedPost { get; set; }
         public UserModel user { get; set; }
@@ -29,6 +30,7 @@ namespace HoldItApp.ViewModels
             user = pm;
             posts = new ObservableCollection<PostModel>();
             userImages = new ObservableCollection<string>();
+            privates = new ObservableCollection<string>();
             uId = pm.id;
             uName = pm.name;
             uPic = pm.pPic;
@@ -56,35 +58,59 @@ namespace HoldItApp.ViewModels
         private async void getEssentials()
         {
             await getAllPosts();
-            await getAllUploads();
+            
         }
 
         private async Task getAllPosts()
         {
             posts.Clear();
             IEnumerable<PostModel> list = await DataService.getPosts();
+            string IncludePrivate = await SecureStorage.GetAsync("Includeprivate");
             foreach (var fn in list)
             {
-                if (fn.ownerId == user.id && fn.isPrivate == 0)
-                {                    
-                    fn.ownerPic = user.pPic;
-                    fn.ownerName = user.name;
-                    posts.Add(fn);
+                if(IncludePrivate == "yes")
+                {
+                    if (fn.ownerId == user.id)
+                    {
+                        fn.ownerPic = user.pPic;
+                        fn.ownerName = user.name;
+                        posts.Add(fn);                        
+                    }
                 }
+                else
+                {
+                    if (fn.ownerId == user.id )
+                    {
+                        if(fn.isPrivate == 0)
+                        {
+                            fn.ownerPic = user.pPic;
+                            fn.ownerName = user.name;
+                            posts.Add(fn);
+                        }
+                        else
+                        {
+                            privates.Add(fn.id.ToString());
+                        }
+                        
+                    }                    
+                }
+             
             }
+            await getAllUploads();
         }
 
         public async Task getAllUploads()
         {
             userImages.Clear();            
             IEnumerable<string> list = await DataService.getUploads();
-            list.ToList().ForEach(fn => {
-                if (fn.Split('_')[0] == user.id.ToString())
+            list.ToList().ForEach(fn => {                            
+                if (!privates.Contains(fn.Split('_')[1]))
                 {
                     userImages.Add($"{DataService.url}/uploads/{fn}");
                 }
 
             });
+            
         }
     }
 }

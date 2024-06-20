@@ -33,9 +33,10 @@ namespace HoldItApp.ViewModels
                 OnPropertyChanged(nameof(selectedPost));
             });
 
-            userSelectionCommand = new Command(() =>
+            userSelectionCommand = new Command(async () =>
             {
                 if (selectedUser == null) return;
+                await SecureStorage.SetAsync("Includeprivate", "no");
                 Shell.Current.ShowPopup(new PopUpUserPage(selectedUser));
 
                 selectedUser = null;

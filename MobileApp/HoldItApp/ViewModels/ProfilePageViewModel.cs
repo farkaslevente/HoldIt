@@ -126,7 +126,7 @@ namespace HoldItApp.ViewModels
                                         { "emptyResult",  emptyResult},
                                         });
                     }
-                }
+                }                
             });
             postDetailCommand = new Command( async() =>
             {

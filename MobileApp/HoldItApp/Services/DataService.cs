@@ -23,13 +23,14 @@ namespace HoldItApp.Services
 {
     public class DataService
     {
-        public static ObservableCollection<PostModel> posts { get; set; } = new ObservableCollection<PostModel>();             
+        public static ObservableCollection<PostModel> posts { get; set; } = new ObservableCollection<PostModel>();
         
-        public static string url = "";            //Your IP address and PORT number must be here like the example one row above
+        //Your IP address and PORT number must be here (http://yourIp:yourBackendPort)
+        public static string url = "";            
 
         // _    _                                     _               
         //| |  | |                                   (_)              
-        //| |  | |___ ___ _ __   ___ ___ _ ____   ___ ___ ___ ___ 
+        //| |  | |___ ___ _ __    ___ ___ _ ____   ___ ___ ___ ___ 
         //| |  | / __|/ _ \ '__| / __|/ _ \ '__\ \ / / |/ __/ _ \/ __|
         //| |__| \__ \  __/ |    \__ \  __/ |   \ V /| | (_|  __/\__ \
         // \____/|___/\___|_|    |___/\___|_|    \_/ |_|\___\___||___/

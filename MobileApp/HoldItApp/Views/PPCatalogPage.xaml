@@ -19,10 +19,20 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <VerticalStackLayout BackgroundColor="White" Margin="5">
-                    <svg:SvgCachedImage Source="{Binding Url}"
+                    <svg:SvgCachedImage Source="{Binding url}"
                            HeightRequest="100" 
                            WidthRequest="100"
                            Aspect="AspectFill"/>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup Name="CommonStates">
+                            <VisualState Name="Normal" />
+                            <VisualState Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
                 </VerticalStackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>

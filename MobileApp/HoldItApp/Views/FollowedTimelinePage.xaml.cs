@@ -71,8 +71,9 @@ public partial class FollowedTimelinePage : ContentPage
         await Shell.Current.GoToAsync("..");
     }
 
-    private void BTNInfo_Clicked(object sender, EventArgs e)
+    private async void BTNInfo_Clicked(object sender, EventArgs e)
     {
+        await SecureStorage.SetAsync("Includeprivate", "yes");
         Shell.Current.ShowPopup(new PopUpUserPage(vm.target));
     }
 }

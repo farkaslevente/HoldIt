@@ -29,7 +29,7 @@
         </Frame>
 
 
-        <Button Text="Új jelszó beállítása" FontSize="19" FontAttributes="Bold" Margin="0,10,0,15" Command="{Binding resetPwdFinalCommand}"/>
+        <Button Text="Confirm new password" FontSize="19" FontAttributes="Bold" Margin="0,10,0,15" Command="{Binding resetPwdFinalCommand}"/>
         <Label Text="{Binding errorMessage}" Style="{StaticResource errorMessage}"/>
     </VerticalStackLayout>
 </ContentPage>

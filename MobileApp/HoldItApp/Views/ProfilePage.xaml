@@ -20,7 +20,6 @@
             <Grid ColumnDefinitions="1*,16*,1*" RowDefinitions="230*,60*,60*,23*,60*,23*,60*,23*,60*,23*,60*,70*,40">
                 <Rectangle Grid.ColumnSpan="3" Margin="0,0,0,80">
                     <Rectangle.Background>
-                        <!-- StartPoint defaults to (0,0) -->
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Color="Black"
                                             Offset="0.1" />
@@ -101,5 +100,6 @@ ColumnDefinitions="*,*,*,*,*" Margin="0,0,0,10">
             <ImageButton x:Name="timelineBTN" Source="darktimeline.svg" Clicked="timelineBTN_Clicked" Grid.Column="3" Grid.Row="1"/>
             <ImageButton x:Name="suppport" Source="support.svg" Clicked="suppport_Clicked" Grid.Column="4" Grid.Row="1"/>
         </Grid>
+        <ImageButton x:Name="BTNChange" Source="change.svg" Margin="10" Grid.Row="2" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" HeightRequest="50" WidthRequest="50" Clicked="BTNChange_Clicked"/>
     </Grid>
 </ContentPage>

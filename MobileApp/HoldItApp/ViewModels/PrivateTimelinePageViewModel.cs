@@ -144,13 +144,13 @@ namespace HoldItApp.ViewModels
                     fn.gridColumn = 0;
                     fn.messageColor = Colors.Black;
                     fn.textColor = Colors.White;
-                    //fn.textAlingment = "Start";
+                    
                     if (fn.ownerId == Int32.Parse(userId))
                     {
                         fn.gridColumn = 1;
                         fn.messageColor = Colors.Blue;
                         fn.textColor = Colors.White;
-                        //fn.textAlingment = "End";
+                        
                     }
                     if (fn.imgUrl.IsNullOrEmpty())
                     {

@@ -56,4 +56,9 @@ public partial class ProfilePage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(SupportPage));
     }
+
+    private async void BTNChange_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(PPCatalogPage));
+    }
 }
