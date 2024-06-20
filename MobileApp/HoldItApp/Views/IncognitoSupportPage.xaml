@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HoldItApp.Views.IncognitoSupportPage"
+             Title="IncognitoSupportPage"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="40,*">
+        <Label Text="User's Manual" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Italic" Margin="0,10,0,0"/>
+        <ImageButton Source="back.svg" Clicked="ImageButton_Clicked" HeightRequest="30" WidthRequest="40" HorizontalOptions="StartAndExpand"/>
+        <ScrollView Grid.Row="1">
+            <Image Source="manual.png" Aspect="AspectFit"/>
+        </ScrollView>
+    </Grid>
+</ContentPage>

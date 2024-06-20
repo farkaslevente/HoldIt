@@ -49,9 +49,8 @@ public partial class TimelinePage : ContentPage
     {
         string uName = await SecureStorage.GetAsync("userName");
         if (uName.IsNullOrEmpty())
-        {
-            //Incognito support page as soon as the user manual is completed
-            await Shell.Current.GoToAsync(nameof(SupportPage));
+        {            
+            await Shell.Current.GoToAsync(nameof(IncognitoSupportPage));
         }
         else
         {

@@ -67,6 +67,9 @@
 		<MauiImage Update="Resources\Images\info.svg">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</MauiImage>
+		<MauiImage Update="Resources\Images\manual.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiImage>
 		<MauiImage Update="Resources\Images\messages.svg">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</MauiImage>
@@ -127,6 +130,7 @@
 	  <None Remove="Resources\Images\darksettings.svg" />
 	  <None Remove="Resources\Images\darksupport.svg" />
 	  <None Remove="Resources\Images\darktimeline.svg" />
+	  <None Remove="Resources\Images\manual.png" />
 	  <None Remove="Resources\Images\support.svg" />
 	  <None Remove="Resources\Images\supportwhite.svg" />
 	</ItemGroup>
@@ -155,6 +159,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\IncognitoSupportPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">

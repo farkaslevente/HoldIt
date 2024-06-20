@@ -9,8 +9,8 @@ public partial class SearchResultPage : ContentPage
 		this.BindingContext = new SearchResultsViewModel();
 	}
 
-    private void ImageButton_Clicked(object sender, EventArgs e)
-    {
-
+    private async void ImageButton_Clicked(object sender, EventArgs e)
+    {		
+		await Shell.Current.GoToAsync("..");
     }
 }

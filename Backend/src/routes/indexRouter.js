@@ -222,7 +222,7 @@ router.post("/users/resetpassword", async function (req, res) {
     try {
       res.json(await postController.getUploads());
     } catch (err) {
-      console.error("Error while getting ads!", err.message);
+      console.error("Error while getting posts!", err.message);
     }
   });
 
@@ -256,7 +256,7 @@ router.delete("/uploads/:id", [verifyToken], async function (req, res) {
       await postController.deleteUpload(req, res, req.user.id, req.params.id)
     );
   } catch (err) {
-    console.error("Error deleting ads", err.message);
+    console.error("Error deleting posts", err.message);
   }
 });
 

@@ -27,6 +27,7 @@ namespace HoldItApp
             Routing.RegisterRoute(nameof(PrivateTimelinePageViewModel), typeof(PrivateTimelinePageViewModel));
             Routing.RegisterRoute(nameof(SupportPage), typeof(SupportPage));
             Routing.RegisterRoute(nameof(TCPage), typeof(TCPage));
+            Routing.RegisterRoute(nameof(IncognitoSupportPage), typeof(IncognitoSupportPage));
         }       
     }
 }

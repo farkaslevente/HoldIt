@@ -21,7 +21,7 @@ const postController = {
             (null, '${imgUrl}', '${d}', '${comment}','${ownerId}','${isPrivate}','${targetId}')`);
       res.status(200).json({ message: "Upload successfully uploaded!" });
     } catch (err) {
-      console.error("Error posting ads!", err.message);
+      console.error("Error posting upload!", err.message);
       res.status(500).json({ error: "Internal server error!" });
     }
   },
@@ -47,13 +47,13 @@ const postController = {
         return res.status(403).json({ message: "Unathorized action" });
       }
     } catch (err) {
-      console.error("Error posting ads!", err.message);
+      console.error("Error posting upload!", err.message);
       res.status(500).json({ error: "Internal server error!" });
     }
   },
 
   deleteUpload: async function (req, res, userId, id) {
-    console.log("Incoming delete on ads...");
+    console.log("Incoming delete on uploads...");
     try {
       const rows =
         (await dbFunctions.execQueryWithReturn(`
@@ -78,7 +78,7 @@ const postController = {
   },
 
   removeUpload: async function (req, res, id) {
-    console.log("Incoming remove on ads...");
+    console.log("Incoming remove on uploads...");
     try {
       await query(`
             DELETE FROM uploads WHERE id = ${id}`);
@@ -99,7 +99,7 @@ const postController = {
       );
       res.status(200).json({ message: "Ad successfully updated!" });
     } catch (err) {
-      console.error("Error posting ads!", err.message);
+      console.error("Error posting uploads!", err.message);
       res.status(500).json({ error: "Internal server error!" });
     }
   },
